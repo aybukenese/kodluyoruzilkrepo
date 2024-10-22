@@ -1,0 +1,87 @@
+using System;
+
+class MergeSort
+{
+    // Dizi bölme ve birleştirme fonksiyonu
+    public static void Merge(int[] array, int left, int mid, int right)
+    {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        int[] LeftArray = new int[n1];
+        int[] RightArray = new int[n2];
+
+        Array.Copy(array, left, LeftArray, 0, n1);
+        Array.Copy(array, mid + 1, RightArray, 0, n2);
+
+        int i = 0, j = 0, k = left;
+
+        while (i < n1 && j < n2)
+        {
+            if (LeftArray[i] <= RightArray[j])
+            {
+                array[k] = LeftArray[i];
+                i++;
+            }
+            else
+            {
+                array[k] = RightArray[j];
+                j++;
+            }
+            k++;
+        }
+
+        // Kalan öğeleri kopyalama
+        while (i < n1)
+        {
+            array[k] = LeftArray[i];
+            i++;
+            k++;
+        }
+        while (j < n2)
+        {
+            array[k] = RightArray[j];
+            j++;
+            k++;
+        }
+    }
+
+    // Merge Sort algoritması
+    public static void MergeSortAlgorithm(int[] array, int left, int right)
+    {
+        if (left < right)
+        {
+            int mid = left + (right - left) / 2;
+
+            // Sol ve sağ yarıyı böl
+            MergeSortAlgorithm(array, left, mid);
+            MergeSortAlgorithm(array, mid + 1, right);
+
+            // Bölünmüş dizileri birleştir
+            Merge(array, left, mid, right);
+        }
+    }
+
+    // Dizi yazdırma fonksiyonu
+    public static void PrintArray(int[] array)
+    {
+        foreach (var item in array)
+        {
+            Console.Write(item + " ");
+        }
+        Console.WriteLine();
+    }
+
+    static void Main(string[] args)
+    {
+        int[] array = { 16, 21, 11, 8, 12, 22 };
+
+        Console.WriteLine("Sıralanmamış dizi:");
+        PrintArray(array);
+
+        MergeSortAlgorithm(array, 0, array.Length - 1);
+
+        Console.WriteLine("Sıralanmış dizi:");
+        PrintArray(array);
+    }
+}
