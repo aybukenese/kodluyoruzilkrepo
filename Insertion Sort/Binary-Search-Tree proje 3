@@ -1,0 +1,114 @@
+using System;
+
+class Program
+{
+    // Insertion Sort algoritması
+    static void InsertionSort(int[] arr)
+    {
+        int n = arr.Length;
+        for (int i = 1; i < n; i++)
+        {
+            int key = arr[i];
+            int j = i - 1;
+
+            // Sol taraftaki öğeleri karşılaştır ve kaydır
+            while (j >= 0 && arr[j] > key)
+            {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+            }
+            arr[j + 1] = key;
+        }
+    }
+
+    // Dizi yazdırma fonksiyonu
+    static void PrintArray(int[] arr)
+    {
+        int n = arr.Length;
+        for (int i = 0; i < n; ++i)
+            Console.Write(arr[i] + " ");
+        Console.WriteLine();
+    }
+
+    static void Main()
+    {
+        int[] arr = { 22, 27, 16, 2, 18, 6 };
+        Console.WriteLine("Sıralanmadan önceki dizi:");
+        PrintArray(arr);
+
+        InsertionSort(arr);
+
+        Console.WriteLine("Insertion Sort sonrası dizi:");
+        PrintArray(arr);
+    }
+}
+
+//Bu kod, verilen diziyi Insertion Sort algoritması kullanarak sıralar. Diziyi adım adım işleyecek ve sonrasında sıralanmış halini ekrana yazdıracaktır.
+
+//2. Selection Sort Uygulaması (C# Kodu):
+
+using System;
+
+class Program
+{
+    // Selection Sort algoritması
+    static void SelectionSort(int[] arr)
+    {
+        int n = arr.Length;
+        for (int i = 0; i < n - 1; i++)
+        {
+            int minIdx = i;
+            for (int j = i + 1; j < n; j++)
+            {
+                if (arr[j] < arr[minIdx])
+                    minIdx = j;
+            }
+
+            // Minimum değeri ilk öğeyle değiştir
+            int temp = arr[minIdx];
+            arr[minIdx] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    // Dizi yazdırma fonksiyonu
+    static void PrintArray(int[] arr)
+    {
+        int n = arr.Length;
+        for (int i = 0; i < n; ++i)
+            Console.Write(arr[i] + " ");
+        Console.WriteLine();
+    }
+
+    static void Main()
+    {
+        int[] arr = { 7, 3, 5, 8, 2, 9, 4, 15, 6 };
+        Console.WriteLine("Sıralanmadan önceki dizi:");
+        PrintArray(arr);
+
+        // İlk 4 adımı gerçekleştireceğiz
+        for (int i = 0; i < 4; i++)
+        {
+            SelectionSortStep(arr, i);
+            Console.WriteLine($"{i + 1}. adım:");
+            PrintArray(arr);
+        }
+    }
+
+    // Selection Sort'un tek adımını uygulayan fonksiyon
+    static void SelectionSortStep(int[] arr, int step)
+    {
+        int n = arr.Length;
+        int minIdx = step;
+        for (int j = step + 1; j < n; j++)
+        {
+            if (arr[j] < arr[minIdx])
+                minIdx = j;
+        }
+
+        // Minimum değeri yer değiştirme
+        int temp = arr[minIdx];
+        arr[minIdx] = arr[step];
+        arr[step] = temp;
+    }
+}
