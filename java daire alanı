@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class DaireHesaplayici {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        // Yarıçapı kullanıcıdan al
+        System.out.print("Yarıçapı giriniz: ");
+        double r = input.nextDouble();
+
+        // Alan ve çevre hesaplamaları
+        double pi = 3.14;
+        double alan = pi * r * r;
+        double cevre = 2 * pi * r;
+
+        System.out.println("Dairenin Alanı: " + alan);
+        System.out.println("Dairenin Çevresi: " + cevre);
+
+        // Daire diliminin alanı için hesaplama
+        System.out.print("Merkez açısının ölçüsünü giriniz (α): ");
+        double alfa = input.nextDouble();
+        double dilimAlani = (pi * r * r * alfa) / 360;
+
+        System.out.println("Daire Diliminin Alanı: " + dilimAlani);
+    }
+}
