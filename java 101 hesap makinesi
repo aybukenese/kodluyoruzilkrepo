@@ -1,0 +1,49 @@
+import java.util.Scanner;
+
+public class Calculator {
+    public static void main(String[] args) {
+        // Kullanıcıdan iki sayı ve işlem türü al
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Birinci sayıyı girin: ");
+        double num1 = scanner.nextDouble();
+        
+        System.out.print("İkinci sayıyı girin: ");
+        double num2 = scanner.nextDouble();
+        
+        System.out.print("İşlem seçin (+, -, *, /): ");
+        char operator = scanner.next().charAt(0);
+        
+        double result;
+
+        // Switch-case ile işlem yapılması
+        switch (operator) {
+            case '+':
+                result = num1 + num2;
+                System.out.println("Sonuç: " + result);
+                break;
+            case '-':
+                result = num1 - num2;
+                System.out.println("Sonuç: " + result);
+                break;
+            case '*':
+                result = num1 * num2;
+                System.out.println("Sonuç: " + result);
+                break;
+            case '/':
+                // Bölme işlemi için sıfıra bölme hatasını kontrol et
+                if (num2 != 0) {
+                    result = num1 / num2;
+                    System.out.println("Sonuç: " + result);
+                } else {
+                    System.out.println("Hata: Sıfıra bölme hatası!");
+                }
+                break;
+            default:
+                System.out.println("Geçersiz işlem!");
+                break;
+        }
+
+        scanner.close();
+    }
+}
