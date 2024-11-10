@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class DersNotlari {
+    public static void main(String[] args) {
+        // Dersler ve notlar için değişkenler
+        String[] dersler = {"Matematik", "Fizik", "Türkçe", "Kimya", "Müzik"};
+        double[] notlar = new double[dersler.length];
+        double toplam = 0;
+        int gecerliNotSayisi = 0;
+        
+        // Scanner nesnesi
+        Scanner scanner = new Scanner(System.in);
+        
+        // Her dersin notunu al
+        for (int i = 0; i < dersler.length; i++) {
+            System.out.print(dersler[i] + " dersinin notunu girin: ");
+            double notu = scanner.nextDouble();
+            
+            // Notu kontrol et
+            if (notu >= 0 && notu <= 100) {
+                notlar[i] = notu;  // Geçerli notu kaydet
+                toplam += notu;    // Toplam notu güncelle
+                gecerliNotSayisi++;  // Geçerli not sayısını artır
+            } else {
+                System.out.println("Geçersiz not! " + dersler[i] + " dersinin notu ortalamaya katılmayacak.");
+            }
+        }
+        
+        // Ortalama hesapla
+        if (gecerliNotSayisi > 0) {
+            double ortalama = toplam / gecerliNotSayisi;
+            System.out.println("Derslerin ortalaması: " + ortalama);
+        } else {
+            System.out.println("Geçerli bir not girilmedi.");
+        }
+        
+        scanner.close();
+    }
+}
