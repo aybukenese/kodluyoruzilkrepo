@@ -1,0 +1,34 @@
+/*
+int sıcaklık = 10;
+var öneriler = new Dictionary<Func<int, bool>, string>
+{
+    { x => x < 5, "Kayak" },
+    { x => x >= 5 && x < 15, "Sinema" },
+    { x => x >= 15 && x < 25, "Piknik" },
+    { x => x >= 25, "Yüzme" }
+};
+
+foreach (var öneri in öneriler)
+{
+    if (öneri.Key(sıcaklık))
+    {
+        Console.WriteLine(öneri.Value);
+        break;
+    }
+}
+                                 */
+
+/*
+using System.Linq;
+
+int sıcaklık = 10;
+var öneri = new[]
+{
+    new { Koşul = (Func<int, bool>)(x => x < 5), Öneri = "Kayak" },
+    new { Koşul = (Func<int, bool>)(x => x >= 5 && x < 15), Öneri = "Sinema" },
+    new { Koşul = (Func<int, bool>)(x => x >= 15 && x < 25), Öneri = "Piknik" },
+    new { Koşul = (Func<int, bool>)(x => x >= 25), Öneri = "Yüzme" }
+}.FirstOrDefault(k => k.Koşul(sıcaklık))?.Öneri;
+
+Console.WriteLine(öneri);
+                                   */
