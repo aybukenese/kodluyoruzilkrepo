@@ -1,0 +1,34 @@
+import java.util.Scanner;
+
+public class ArtikYilHesaplayici {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Yıl Giriniz: ");
+        int yil = scanner.nextInt();
+
+        boolean artikYil = false;
+
+        if (yil % 4 == 0) {
+            if (yil % 100 == 0) {
+                if (yil % 400 == 0) {
+                    artikYil = true; // 400'e tam bölünebiliyorsa artık yıldır
+                } else {
+                    artikYil = false; // 100'e bölünebiliyor ama 400'e bölünemiyorsa artık yıl değildir
+                }
+            } else {
+                artikYil = true; // 4'e bölünebiliyor ama 100'e bölünemiyorsa artık yıldır
+            }
+        } else {
+            artikYil = false; // 4'e bölünemiyorsa artık yıl değildir
+        }
+
+        if (artikYil) {
+            System.out.println(yil + " bir artık yıldır!");
+        } else {
+            System.out.println(yil + " bir artık yıl değildir!");
+        }
+
+        scanner.close();
+    }
+}
