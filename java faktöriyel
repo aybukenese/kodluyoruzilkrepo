@@ -1,0 +1,40 @@
+import java.util.Scanner;
+
+public class Main {
+
+    // Faktöriyel hesaplama fonksiyonu
+    public static long faktoriyel(int sayi) {
+        long sonuc = 1;
+        for (int i = 1; i <= sayi; i++) {
+            sonuc *= i;
+        }
+        return sonuc;
+    }
+
+    // Kombinasyon hesaplama fonksiyonu
+    public static long kombinasyon(int n, int r) {
+        // C(n, r) = n! / (r! * (n-r)!)
+        return faktoriyel(n) / (faktoriyel(r) * faktoriyel(n - r));
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Kullanıcıdan n ve r değerlerini alın
+        System.out.print("n değerini girin: ");
+        int n = scanner.nextInt();
+        
+        System.out.print("r değerini girin: ");
+        int r = scanner.nextInt();
+
+        // Kombinasyonu hesapla ve sonucu ekrana yazdır
+        if (r <= n && r >= 0) {
+            long sonuc = kombinasyon(n, r);
+            System.out.println("C(" + n + ", " + r + ") = " + sonuc);
+        } else {
+            System.out.println("Geçersiz giriş: r, n'den büyük olamaz ve negatif olamaz.");
+        }
+
+        scanner.close();
+    }
+}
