@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Kullanıcıdan bir sayı girmesini isteyin
+        System.out.print("Bir sayı girin: ");
+        int sayi = scanner.nextInt();
+        
+        int toplam = 0;
+        int sayac = 0;
+        
+        // 0'dan girilen sayıya kadar döngü
+        for (int i = 0; i <= sayi; i++) {
+            // Sayının hem 3'e hem de 4'e tam bölünüp bölünmediğini kontrol et
+            if (i % 3 == 0 && i % 4 == 0) {
+                toplam += i;   // Eğer bölünüyorsa, sayıyı toplamda biriktir
+                sayac++;       // Geçerli sayıyı say
+            }
+        }
+        
+        // Eğer 3 ve 4'e bölünen sayılar varsa, ortalamayı hesapla
+        if (sayac > 0) {
+            double ortalama = (double) toplam / sayac;
+            System.out.println("3 ve 4'e tam bölünen sayıların ortalaması: " + ortalama);
+        } else {
+            System.out.println("3 ve 4'e tam bölünen sayı bulunamadı.");
+        }
+        
+        scanner.close();
+    }
+}
