@@ -1,0 +1,24 @@
+import java.util.Scanner;
+
+public class UsluSayiHesaplama {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Kullanıcıdan taban ve üs değerlerini alıyoruz
+        System.out.print("Taban değerini giriniz: ");
+        int taban = scanner.nextInt();
+
+        System.out.print("Üs değerini giriniz: ");
+        int us = scanner.nextInt();
+
+        // Üslü sayıyı hesaplamak için değişken
+        int sonuc = 1;
+
+        // Üslü sayıyı hesaplamak için for döngüsü
+        for (int i = 1; i <= us; i++) {
+            sonuc *= taban;
+        }
+
+        System.out.println(taban + " üzeri " + us + " = " + sonuc);
+    }
+}
