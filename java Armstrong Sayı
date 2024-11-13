@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Sayı Giriniz: ");
+        int number = input.nextInt();
+        int sum = 0;
+        int tempNumber = number;
+
+        while (tempNumber != 0) {
+            int digit = tempNumber % 10; // Son basamağı al
+            sum += digit; // Basamağı toplama ekle
+            tempNumber /= 10; // Sayıyı bir basamak küçült
+        }
+
+        System.out.println(number + " sayısının basamak sayılarının toplamı: " + sum);
+    }
+}
