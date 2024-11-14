@@ -1,0 +1,24 @@
+public class Main {
+    public static void main(String[] args) {
+        // 1 ile 100 arasındaki asal sayıları bulma
+        System.out.print("1 - 100 arasındaki asal sayılar: ");
+        
+        // 2'den 100'e kadar olan sayıları kontrol ediyoruz
+        for (int i = 2; i <= 100; i++) {
+            boolean asal = true;
+            
+            // 2'den i'nin kareköküne kadar olan sayılarla böldürmeyi kontrol ediyoruz
+            for (int j = 2; j <= Math.sqrt(i); j++) {
+                if (i % j == 0) {
+                    asal = false;  // Eğer bölen bulunduysa, asal değildir
+                    break;  // Daha fazla kontrol etmeye gerek yok
+                }
+            }
+            
+            // Eğer asal ise ekrana yazdırıyoruz
+            if (asal) {
+                System.out.print(i + " ");
+            }
+        }
+    }
+}
