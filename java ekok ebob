@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        // Kullanıcıdan iki sayı alıyoruz
+        System.out.print("Birinci sayıyı girin: ");
+        int n1 = sc.nextInt();
+        System.out.print("İkinci sayıyı girin: ");
+        int n2 = sc.nextInt();
+        
+        // EBOB hesaplamak için başlangıçta en küçük sayıyı alıyoruz
+        int ebob = 1;
+        int i = 1;
+        
+        // While döngüsü ile EBOB'u bulma
+        while (i <= n1 && i <= n2) {
+            if (n1 % i == 0 && n2 % i == 0) { // Eğer i hem n1'i hem de n2'yi böliyorsa
+                ebob = i; // i'yi EBOB olarak güncelle
+            }
+            i++; // i'yi arttırıyoruz
+        }
+        
+        // EKOK hesaplama: EKOK = (n1 * n2) / EBOB
+        int ekok = (n1 * n2) / ebob;
+        
+        // Sonuçları yazdırma
+        System.out.println("EBOB: " + ebob);
+        System.out.println("EKOK: " + ekok);
+    }
+}
