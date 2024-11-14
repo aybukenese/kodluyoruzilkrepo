@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        // Scanner nesnesi oluşturuyoruz
+        Scanner sc = new Scanner(System.in);
+        
+        // Kullanıcıdan sayı alıyoruz
+        System.out.print("Bir sayı giriniz: ");
+        int num = sc.nextInt();
+        
+        // Mükemmel sayıyı kontrol etmek için değişken
+        int sum = 0;
+        
+        // 1'den num'un yarısına kadar olan sayıları kontrol ediyoruz
+        for (int i = 1; i <= num / 2; i++) {
+            if (num % i == 0) { // i, num'un böleni ise
+                sum += i; // i'yi toplamımıza ekliyoruz
+            }
+        }
+        
+        // Mükemmel sayıyı kontrol ediyoruz
+        if (sum == num) {
+            System.out.println(num + " Mükemmel sayıdır.");
+        } else {
+            System.out.println(num + " Mükemmel sayı değildir.");
+        }
+    }
+}
