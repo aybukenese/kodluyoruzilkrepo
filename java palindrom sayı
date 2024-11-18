@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class PalindromSayi {
+    public static void main(String[] args) {
+        // Kullanıcıdan giriş almak için Scanner sınıfını kullanıyoruz
+        Scanner scanner = new Scanner(System.in);
+        
+        // Kullanıcıdan bir sayı alıyoruz
+        System.out.print("Bir sayı girin: ");
+        int sayi = scanner.nextInt();
+        
+        // Palindrom olup olmadığını kontrol ediyoruz
+        if (isPalindrom(sayi)) {
+            System.out.println(sayi + " bir palindrom sayıdır.");
+        } else {
+            System.out.println(sayi + " bir palindrom sayı değildir.");
+        }
+        
+        // Scanner'ı kapatıyoruz
+        scanner.close();
+    }
+    
+    // Palindrom sayıyı kontrol etmek için bir metot
+    public static boolean isPalindrom(int sayi) {
+        int orijinalSayi = sayi;  // Orijinal sayıyı kaydediyoruz
+        int tersSayi = 0;
+        
+        // Sayıyı tersine çeviriyoruz
+        while (sayi != 0) {
+            int basamk = sayi % 10;  // Son basamağı alıyoruz
+            tersSayi = tersSayi * 10 + basamk;  // Ters sayıyı oluşturuyoruz
+            sayi /= 10;  // Son basamağı çıkartıyoruz
+        }
+        
+        // Eğer ters sayı orijinal sayıya eşitse, sayı palindromdur
+        return orijinalSayi == tersSayi;
+    }
+}
