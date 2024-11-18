@@ -1,0 +1,19 @@
+#1. Listeyi Düzleştirme (Flatten):
+def flatten(lst):
+    flat_list = []
+    for item in lst:
+        if isinstance(item, list):  # Eğer item bir listeyse
+            flat_list.extend(flatten(item))  # Rekürsif olarak düzleştir
+        else:
+            flat_list.append(item)  # Liste değilse, direkt ekle
+    return flat_list
+
+#2. Listeyi Tersine Döndürme (Reverse):
+def reverse(lst):
+    reversed_list = []
+    for item in lst:
+        if isinstance(item, list):  # Eğer item bir listeyse
+            reversed_list.append(reverse(item))  # Rekürsif olarak tersine döndür
+        else:
+            reversed_list.append(item)  # Liste değilse, olduğu gibi ekle
+    return reversed_list[::-1]  # Listeyi tersine çevir
