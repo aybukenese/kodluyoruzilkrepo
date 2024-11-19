@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+public class RecursivePrimeCheck {
+
+    // Recursive method to check if a number is prime
+    static boolean isPrime(int number, int divisor) {
+        if (number < 2) {
+            return false; // Numbers less than 2 are not prime
+        }
+        if (divisor == 1) {
+            return true; // If we have reached 1, the number is prime
+        }
+        if (number % divisor == 0) {
+            return false; // If divisible by any number other than 1 and itself, it's not prime
+        }
+        return isPrime(number, divisor - 1); // Recursive call
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Sayı Giriniz: ");
+        int number = scanner.nextInt();
+
+        boolean result = isPrime(number, number / 2);
+
+        if (result) {
+            System.out.println(number + " sayısı ASALDIR!");
+        } else {
+            System.out.println(number + " sayısı ASAL değildir!");
+        }
+    }
+}
