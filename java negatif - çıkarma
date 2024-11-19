@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+public class RecursiveSubtractionAddition {
+
+    // Recursive method to subtract and then add 5, following the given rule
+    static void subtractAndAddFive(int number) {
+        System.out.print(number + " ");  // Print the current number
+        
+        // Base case: If number is 0 or negative, start adding 5
+        if (number <= 0) {
+            return;
+        }
+        
+        // Recursive call: Subtract 5 and call the method again
+        subtractAndAddFive(number - 5);
+        
+        // After returning from recursion, start adding 5
+        System.out.print(number + " ");
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Get the input from user
+        System.out.print("N Sayısı: ");
+        int n = scanner.nextInt();
+
+        // Call the recursive method
+        subtractAndAddFive(n);
+    }
+}
