@@ -1,0 +1,76 @@
+// Employee Sınıfı
+public class Employee {
+    String name;      // Çalışanın adı
+    double salary;    // Çalışanın maaşı
+    int workHours;    // Haftalık çalışma saati
+    int hireYear;     // İşe başlama yılı
+
+    // Kurucu metod
+    public Employee(String name, double salary, int workHours, int hireYear) {
+        this.name = name;
+        this.salary = salary;
+        this.workHours = workHours;
+        this.hireYear = hireYear;
+    }
+
+    // Vergi hesaplama metodu
+    public double tax() {
+        if (salary < 1000) {
+            return 0; // Maaş 1000 TL'den azsa vergi yok
+        } else {
+            return salary * 0.03; // Maaş 1000 TL'den fazlaysa %3 vergi
+        }
+    }
+
+    // Bonus hesaplama metodu
+    public double bonus() {
+        if (workHours > 40) {
+            return (workHours - 40) * 30; // Haftalık 40 saatin üzeri için bonus
+        } else {
+            return 0;
+        }
+    }
+
+    // Maaş artışı hesaplama metodu
+    public double raiseSalary() {
+        int yearsWorked = 2021 - hireYear; // Çalışanların kaç yıl çalıştığını hesapla
+        if (yearsWorked < 10) {
+            return salary * 0.05; // 10 yıldan az çalıştıysa maaşına %5 artış
+        } else if (yearsWorked >= 10 && yearsWorked <= 19) {
+            return salary * 0.10; // 10 ila 19 yıl çalıştıysa maaşına %10 artış
+        } else {
+            return salary * 0.15; // 20 yıldan fazla çalıştıysa maaşına %15 artış
+        }
+    }
+
+    // Çalışana ait bilgileri döndüren toString metodu
+    @Override
+    public String toString() {
+        double tax = tax();
+        double bonus = bonus();
+        double raise = raiseSalary();
+        double totalSalary = salary + bonus + raise - tax; // Vergi ve bonuslarla birlikte maaş hesapla
+        double finalSalary = salary + bonus + raise; // Vergi ve bonuslar dahil maaş
+
+        return "Adı : " + name + "\n" +
+               "Maaşı : " + salary + "\n" +
+               "Çalışma Saati : " + workHours + "\n" +
+               "Başlangıç Yılı : " + hireYear + "\n" +
+               "Vergi : " + tax + "\n" +
+               "Bonus : " + bonus + "\n" +
+               "Maaş Artışı : " + raise + "\n" +
+               "Vergi ve Bonuslar ile birlikte maaş : " + finalSalary + "\n" +
+               "Toplam Maaş : " + totalSalary;
+    }
+}
+//-----------------------------------------------------------------------------------------------------------
+//Main Sınıfı (Ana Program)
+public class Main {
+    public static void main(String[] args) {
+        // Çalışan nesnelerini oluşturma
+        Employee employee1 = new Employee("Kemal", 2000, 45, 1985);
+
+        // Çalışana ait bilgileri yazdırma
+        System.out.println(employee1);
+    }
+}
