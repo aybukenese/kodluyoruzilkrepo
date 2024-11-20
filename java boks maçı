@@ -1,0 +1,81 @@
+// Boxer Sınıfı
+public class Boxer {
+    String name;
+    int health;
+    int power;
+
+    // Constructor
+    public Boxer(String name, int health, int power) {
+        this.name = name;
+        this.health = health;
+        this.power = power;
+    }
+
+    // Dövüşçüye saldırı yap
+    public void attack(Boxer opponent) {
+        // Saldırı yap ve rakipten sağlık çal
+        opponent.health -= this.power;
+        System.out.println(this.name + " has attacked " + opponent.name + " for " + this.power + " damage!");
+    }
+
+    // Dövüşçü hayatta mı?
+    public boolean isAlive() {
+        return this.health > 0;
+    }
+}
+//------------------------------------------------------------------------------
+//Match Sınıfı
+public class Match {
+    Boxer boxer1;
+    Boxer boxer2;
+
+    // Constructor
+    public Match(Boxer boxer1, Boxer boxer2) {
+        this.boxer1 = boxer1;
+        this.boxer2 = boxer2;
+    }
+
+    // Maç başlatma
+    public void startMatch() {
+        System.out.println("The match between " + boxer1.name + " and " + boxer2.name + " begins!");
+
+        // İlk dövüşçü kim olacak?
+        if (Math.random() < 0.5) {
+            System.out.println(boxer1.name + " starts the fight!");
+            fight(boxer1, boxer2);
+        } else {
+            System.out.println(boxer2.name + " starts the fight!");
+            fight(boxer2, boxer1);
+        }
+    }
+
+    // Dövüşün gerçekleştiği metot
+    private void fight(Boxer first, Boxer second) {
+        while (first.isAlive() && second.isAlive()) {
+            first.attack(second);  // İlk dövüşçü saldırır
+            if (second.isAlive()) {
+                second.attack(first);  // Eğer rakip hayatta ise, ikinci dövüşçü saldırır
+            }
+        }
+
+        // Maç sonucu
+        if (first.isAlive()) {
+            System.out.println(first.name + " wins the match!");
+        } else {
+            System.out.println(second.name + " wins the match!");
+        }
+    }
+}
+//-----------------------------------------------------
+//Main Sınıfı (Ana Program)
+public class Main {
+    public static void main(String[] args) {
+        // Dövüşçüler
+        Boxer boxer1 = new Boxer("Mike Tyson", 100, 20);
+        Boxer boxer2 = new Boxer("Muhammad Ali", 100, 18);
+
+        // Maç başlatma
+        Match match = new Match(boxer1, boxer2);
+        match.startMatch();
+    }
+}
