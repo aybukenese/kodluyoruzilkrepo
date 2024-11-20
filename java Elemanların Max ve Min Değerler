@@ -1,0 +1,31 @@
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        // Dizi ve girilen sayıyı tanımlayalım
+        int[] numbers = {15, 12, 788, 1, -1, -778, 2, 0};
+        int input = 5;
+        
+        // Diziyi sıralıyoruz
+        Arrays.sort(numbers);
+        
+        int smaller = -1; // Girilen sayıdan küçük en yakın sayı
+        int larger = -1;  // Girilen sayıdan büyük en yakın sayı
+        
+        // Diziyi kontrol ederek uygun sayıları bulalım
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] < input) {
+                smaller = numbers[i]; // küçük en yakın sayı
+            }
+            if (numbers[i] > input && larger == -1) {
+                larger = numbers[i]; // büyük en yakın sayı
+                break; // İlk bulduğumuzda çıkabiliriz
+            }
+        }
+
+        // Sonuçları ekrana yazdıralım
+        System.out.println("Girilen Sayı: " + input);
+        System.out.println("Girilen sayıdan küçük en yakın sayı: " + smaller);
+        System.out.println("Girilen sayıdan büyük en yakın sayı: " + larger);
+    }
+}
