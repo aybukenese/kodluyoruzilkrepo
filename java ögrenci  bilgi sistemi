@@ -1,0 +1,142 @@
+//Course Sınıfı (Ders Sınıfı)
+public class Course {
+    Teacher courseTeacher;
+    String name;
+    String code;
+    String prefix;
+    int note;  // Sınav notu
+    int verbalNote; // Sözlü notu
+    double verbalEffect; // Sözlü notunun ortalamaya etkisi (örneğin: %20)
+
+    // Course constructor
+    public Course(String name, String code, String prefix, double verbalEffect) {
+        this.name = name;
+        this.code = code;
+        this.prefix = prefix;
+        this.note = 0;
+        this.verbalNote = 0;
+        this.verbalEffect = verbalEffect;
+    }
+
+    public void addTeacher(Teacher t) {
+        if (this.prefix.equals(t.branch)) {
+            this.courseTeacher = t;
+            System.out.println("İşlem başarılı");
+        } else {
+            System.out.println(t.name + " Akademisyeni bu dersi veremez.");
+        }
+    }
+
+    public void printTeacher() {
+        if (courseTeacher != null) {
+            System.out.println(this.name + " dersinin Akademisyeni : " + courseTeacher.name);
+        } else {
+            System.out.println(this.name + " dersine Akademisyen atanmamıştır.");
+        }
+    }
+
+    // Ortalamayı hesapla: Sözlü notunun etkisi ve sınav notunun etkisini ayrı ayrı dikkate al
+    public double calculateAverage() {
+        return (this.verbalNote * this.verbalEffect) + (this.note * (1 - this.verbalEffect));
+    }
+}
+//------------------------------------------------------------------------
+//Student Sınıfı (Öğrenci Sınıfı)
+public class Student {
+    String name, stuNo;
+    int classes;
+    Course mat;
+    Course fizik;
+    Course kimya;
+    double avarage;
+    boolean isPass;
+
+    // Student constructor
+    Student(String name, int classes, String stuNo, Course mat, Course fizik, Course kimya) {
+        this.name = name;
+        this.classes = classes;
+        this.stuNo = stuNo;
+        this.mat = mat;
+        this.fizik = fizik;
+        this.kimya = kimya;
+        calcAvarage();
+        this.isPass = false;
+    }
+
+    // Notları ve sözlü notları gir
+    public void addBulkExamNote(int mat, int fizik, int kimya, int matVerbal, int fizikVerbal, int kimyaVerbal) {
+        if (mat >= 0 && mat <= 100) {
+            this.mat.note = mat;
+        }
+        if (fizik >= 0 && fizik <= 100) {
+            this.fizik.note = fizik;
+        }
+        if (kimya >= 0 && kimya <= 100) {
+            this.kimya.note = kimya;
+        }
+
+        // Sözlü notları da ekle
+        if (matVerbal >= 0 && matVerbal <= 100) {
+            this.mat.verbalNote = matVerbal;
+        }
+        if (fizikVerbal >= 0 && fizikVerbal <= 100) {
+            this.fizik.verbalNote = fizikVerbal;
+        }
+        if (kimyaVerbal >= 0 && kimyaVerbal <= 100) {
+            this.kimya.verbalNote = kimyaVerbal;
+        }
+    }
+
+    // Öğrencinin geçip geçmediğini kontrol et
+    public void isPass() {
+        if (this.mat.note == 0 || this.fizik.note == 0 || this.kimya.note == 0) {
+            System.out.println("Notlar tam olarak girilmemiş");
+        } else {
+            this.isPass = isCheckPass();
+            printNote();
+            System.out.println("Ortalama : " + this.avarage);
+            if (this.isPass) {
+                System.out.println("Sınıfı Geçti.");
+            } else {
+                System.out.println("Sınıfta Kaldı.");
+            }
+        }
+    }
+
+    // Ortalamayı hesapla
+    public void calcAvarage() {
+        double matAverage = mat.calculateAverage();
+        double fizikAverage = fizik.calculateAverage();
+        double kimyaAverage = kimya.calculateAverage();
+        
+        this.avarage = (matAverage + fizikAverage + kimyaAverage) / 3;
+    }
+
+    // Geçme kontrolü
+    public boolean isCheckPass() {
+        calcAvarage();
+        return this.avarage > 55;
+    }
+
+    // Notları yazdır
+    public void printNote() {
+        System.out.println("=========================");
+        System.out.println("Öğrenci : " + this.name);
+        System.out.println("Matematik Notu : " + this.mat.note + " | Sözlü Notu : " + this.mat.verbalNote);
+        System.out.println("Fizik Notu : " + this.fizik.note + " | Sözlü Notu : " + this.fizik.verbalNote);
+        System.out.println("Kimya Notu : " + this.kimya.note + " | Sözlü Notu : " + this.kimya.verbalNote);
+    }
+}
+//------------------------------------------------------------------------------
+// Teacher Sınıfı (Öğretmen Sınıfı)
+public class Teacher {
+    String name;
+    String mpno;
+    String branch;
+
+    public Teacher(String name, String mpno, String branch) {
+        this.name = name;
+        this.mpno = mpno;
+        this.branch = branch;
+    }
+}
