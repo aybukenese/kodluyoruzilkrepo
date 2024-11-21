@@ -1,0 +1,39 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class SayıTahminOyunu {
+    public static void main(String[] args) {
+        // Rastgele sayı üreten nesne
+        Random rand = new Random();
+        // 0 ile 100 arasında rastgele bir sayı seç
+        int randomNumber = rand.nextInt(101);  // 0 dahil, 100 dahil değil
+        
+        // Kullanıcıdan giriş almak için Scanner
+        Scanner scanner = new Scanner(System.in);
+        
+        int tahmin = -1; // Kullanıcı tahmini
+        int denemeSayısı = 0; // Kullanıcının tahmin sayısını sayalım
+        
+        System.out.println("Sayı Tahmin Oyununa Hoşgeldiniz!");
+        System.out.println("0 ile 100 arasında bir sayı tahmin edin.");
+
+        // Kullanıcı doğru tahmin edene kadar döngü çalışacak
+        while (tahmin != randomNumber) {
+            System.out.print("Tahmininiz: ");
+            tahmin = scanner.nextInt();
+            denemeSayısı++;
+            
+            // Kullanıcının tahminine göre ipucu ver
+            if (tahmin < randomNumber) {
+                System.out.println("Daha büyük bir sayı tahmin edin.");
+            } else if (tahmin > randomNumber) {
+                System.out.println("Daha küçük bir sayı tahmin edin.");
+            } else {
+                System.out.println("Tebrikler! Doğru tahmin ettiniz.");
+                System.out.println("Tahmininizi " + denemeSayısı + " denemede bildiniz.");
+            }
+        }
+        
+        scanner.close();
+    }
+}
