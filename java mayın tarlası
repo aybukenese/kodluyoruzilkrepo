@@ -1,0 +1,112 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class MayinTarlasi {
+
+    // Tahtanın boyutları
+    static final int ROWS = 5;
+    static final int COLS = 5;
+    // Mayınların sayısı
+    static final int MINE_COUNT = 5;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Oyun tahtası (boş ve mayınlarla)
+        char[][] board = new char[ROWS][COLS];
+        char[][] displayBoard = new char[ROWS][COLS];
+        
+        // Tahtayı başlat (tüm hücreler boş olacak)
+        initializeBoard(board);
+        // Mayınları yerleştir
+        placeMines(board);
+
+        // Kullanıcı tahtayı gösteriyor
+        initializeDisplayBoard(displayBoard);
+
+        System.out.println("Mayın Tarlası oyununa hoş geldiniz!");
+        printBoard(displayBoard);
+
+        // Oyun başlatma
+        int remainingCells = ROWS * COLS - MINE_COUNT; // Kalan boş hücre sayısı
+        boolean gameOver = false;
+
+        while (remainingCells > 0 && !gameOver) {
+            System.out.print("Bir hücre seçin (satır ve sütun): ");
+            int row = scanner.nextInt();
+            int col = scanner.nextInt();
+
+            if (row < 0 || row >= ROWS || col < 0 || col >= COLS) {
+                System.out.println("Geçersiz konum! Tahtanın dışında bir konum girdiniz.");
+                continue;
+            }
+
+            if (displayBoard[row][col] != '*') {
+                System.out.println("Bu hücre zaten açılmış.");
+                continue;
+            }
+
+            // Mayın mı var kontrolü
+            if (board[row][col] == 'M') {
+                System.out.println("Mayına bastınız! Oyun Bitti!");
+                gameOver = true;
+            } else {
+                // Hücreyi aç
+                displayBoard[row][col] = '0';
+                remainingCells--;
+            }
+
+            // Tahtayı güncelle
+            printBoard(displayBoard);
+        }
+
+        if (!gameOver) {
+            System.out.println("Tebrikler! Mayınları geçtiniz!");
+        }
+
+        scanner.close();
+    }
+
+    // Tahtayı başlat
+    public static void initializeBoard(char[][] board) {
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLS; j++) {
+                board[i][j] = '0'; // Başlangıçta tüm hücreler boş
+            }
+        }
+    }
+
+    // Tahtayı görüntüleme
+    public static void initializeDisplayBoard(char[][] displayBoard) {
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLS; j++) {
+                displayBoard[i][j] = '*'; // Başlangıçta tüm hücreler kapalı
+            }
+        }
+    }
+
+    // Mayınları rastgele yerleştir
+    public static void placeMines(char[][] board) {
+        Random random = new Random();
+        int minesPlaced = 0;
+
+        while (minesPlaced < MINE_COUNT) {
+            int row = random.nextInt(ROWS);
+            int col = random.nextInt(COLS);
+            if (board[row][col] != 'M') { // Mayın zaten var mı?
+                board[row][col] = 'M'; // Mayın yerleştir
+                minesPlaced++;
+            }
+        }
+    }
+
+    // Tahtayı yazdır
+    public static void printBoard(char[][] board) {
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLS; j++) {
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
