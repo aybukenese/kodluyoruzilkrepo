@@ -1,0 +1,40 @@
+public class MatrixTranspose {
+    public static void main(String[] args) {
+        // Matrisin tanımlanması (örnek matris)
+        int[][] matrix = {
+            {2, 3, 4},
+            {5, 6, 4}
+        };
+
+        // Matrisin transpozunu almak için gereken matrisin boyutları
+        int rows = matrix.length;        // Satır sayısı
+        int columns = matrix[0].length;  // Sütun sayısı
+
+        // Transpozu tutacak matris (sütun ve satırların yer değiştirilmesi)
+        int[][] transpose = new int[columns][rows];
+
+        // Transpozu almak
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                transpose[j][i] = matrix[i][j];
+            }
+        }
+
+        // Sonuçları yazdırma
+        System.out.println("Matris:");
+        printMatrix(matrix);
+
+        System.out.println("Transpoze:");
+        printMatrix(transpose);
+    }
+
+    // Matrisin yazdırılması için yardımcı bir metot
+    public static void printMatrix(int[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(matrix[i][j] + "\t");
+            }
+            System.out.println();
+        }
+    }
+}
