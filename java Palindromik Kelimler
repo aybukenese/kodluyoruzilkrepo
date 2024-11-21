@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class PalindromikKelime {
+    public static void main(String[] args) {
+        // Kullanıcıdan giriş almak için Scanner sınıfı
+        Scanner scanner = new Scanner(System.in);
+        
+        // Kullanıcıdan bir kelime girmesini isteme
+        System.out.print("Bir kelime girin: ");
+        String kelime = scanner.nextLine();
+        
+        // Kelimeyi tersten kontrol etmek için StringBuilder kullanıyoruz
+        String tersKelime = new StringBuilder(kelime).reverse().toString();
+        
+        // Palindromik kontrolü
+        if (kelime.equals(tersKelime)) {
+            System.out.println(kelime + " palindromik bir kelimedir.");
+        } else {
+            System.out.println(kelime + " palindromik bir kelime değildir.");
+        }
+        
+        // Scanner'ı kapatma
+        scanner.close();
+    }
+}
