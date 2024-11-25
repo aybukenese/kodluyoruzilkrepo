@@ -1,0 +1,75 @@
+using System;
+
+namespace OperatorExample
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Değişkenlerin Tanımlanması
+            int y = 5;
+
+            // Aritmetik ve Atama Operatörleri
+            Console.WriteLine("Başlangıç değeri: " + y);
+
+            // Atama ve İşlemli Atama Operatörü
+            y += 2;  // Bu, y = y + 2 anlamına gelir.
+            Console.WriteLine("İşlemli atamadan sonra: " + y);
+
+            y -= 3;  // y = y - 3
+            Console.WriteLine("Bir azaltma sonrası: " + y);
+
+            // Çarpma ve Bölme Operatörleri
+            int x = 2;
+            x *= 3;  // x = x * 3
+            Console.WriteLine("Çarpma sonrası x: " + x);
+
+            x /= 2;  // x = x / 2
+            Console.WriteLine("Bölme sonrası x: " + x);
+
+            // Mod Operatörü
+            int sayi = 20;
+            int modSonuc = sayi % 3;  // Mod işlemi, 20'nin 3'e bölümünden kalan
+            Console.WriteLine("Mod sonucu: " + modSonuc);
+
+            // Mantıksal Operatörler
+            bool isCompleted = true;
+            bool isAccessGranted = false;
+
+            // AND (Ve) Operatörü
+            if (isCompleted && isAccessGranted)
+            {
+                Console.WriteLine("Erişim sağlandı.");
+            }
+            else
+            {
+                Console.WriteLine("Erişim sağlanamadı.");
+            }
+
+            // OR (Veya) Operatörü
+            if (isCompleted || isAccessGranted)
+            {
+                Console.WriteLine("Bir işlem başarılı.");
+            }
+
+            // NOT (Değil) Operatörü
+            if (!isAccessGranted)
+            {
+                Console.WriteLine("Erişim reddedildi.");
+            }
+
+            // İlişkisel Operatörler
+            int a = 5, b = 10;
+            Console.WriteLine("a < b: " + (a < b));  // Küçük
+            Console.WriteLine("a > b: " + (a > b));  // Büyük
+            Console.WriteLine("a == b: " + (a == b)); // Eşit
+            Console.WriteLine("a != b: " + (a != b)); // Eşit Değil
+            Console.WriteLine("a <= b: " + (a <= b)); // Küçük Eşit
+            Console.WriteLine("a >= b: " + (a >= b)); // Büyük Eşit
+
+            // Değer Atama
+            a = 8;
+            Console.WriteLine("Yeni a değeri: " + a);
+        }
+    }
+}
