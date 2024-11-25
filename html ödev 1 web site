@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Neşe Aybüke ÖZTÜRK </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1 {
+            color: black;
+            font-size: 2em;
+        }
+        h2 {
+            margin-top: 30px;
+            color: #333;
+        }
+        p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Neşe Aybüke Öztürk </h1>
+    
+    <h2>Hakkımda</h2>
+    <p>Merhaba. Ben Neşe bilgisayar programcılığı okudum ama bu alanda çalışmadım şimdi hem bu alanda kendimi geliştirmek hem de bir iş gerekliliklerini karşılamak için bilgilerimi patika ile tazelemeye çalışıyorum </p>
+    
+    <h2>Sevdiğim Diziler</h2>
+    <h3>İlk ve Son </h3>
+    <p>İlk ve Son : iki kişi arasındaki bozuk iletişimin ve travmaların ilişkiye yansıdıgında ne gibi sorunlar olabileceğini anlatan bir romantik dram filmi toplamda iki sezon yayınlandı. Ben daha çok birinci bölümünü seviyorum </p>
+</body>
+</html>
