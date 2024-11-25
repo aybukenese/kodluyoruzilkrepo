@@ -1,0 +1,76 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Değişken Tanımlama ve İlk Değer Atama
+        int number = 10;  // Tamsayı değişken
+        Console.WriteLine("Number: " + number);
+
+        // Değeri Atanmayan Değişken Hatası
+        // int uninitializedVariable;
+        // Console.WriteLine(uninitializedVariable); // Derleme hatası: Değişken atanmadı.
+
+        // Büyük-Küçük Harf Duyarlılığı
+        int value = 5;
+        int Value = 10;  // Farklı değişken
+        Console.WriteLine("value: " + value);
+        Console.WriteLine("Value: " + Value);
+
+        // Geçerli ve Geçersiz Değişken İsimleri
+        // int 1number;  // Geçersiz: Rakamla başlayamaz.
+        int _number = 20; // Geçerli: Alt çizgi ile başlayabilir.
+        Console.WriteLine("_number: " + _number);
+
+        // Özel Anahtar Kelimeler
+        // int int;  // Geçersiz: Anahtar kelimeler kullanılamaz.
+        int @class = 30;  // Geçerli: @ ile anahtar kelime kullanılabilir.
+        Console.WriteLine("@class: " + @class);
+
+        // Veri Tipleri ve Bellek Kullanımı
+        byte byteVar = 255;      // 0 ile 255 arasında değer alır (1 byte).
+        sbyte sbyteVar = -128;   // -128 ile 127 arasında değer alır (1 byte).
+        short shortVar = 32767;  // -32768 ile 32767 arasında değer alır (2 byte).
+        ushort ushortVar = 65535;// 0 ile 65535 arasında değer alır (2 byte).
+        int intVar = 2147483647; // -2,147,483,648 ile 2,147,483,647 arasında değer alır (4 byte).
+        uint uintVar = 4294967295; // 0 ile 4,294,967,295 arasında değer alır (4 byte).
+        long longVar = 9223372036854775807; // Çok geniş bir aralık (8 byte).
+        ulong ulongVar = 18446744073709551615; // Yalnızca pozitif (8 byte).
+        float floatVar = 3.14f;  // Ondalıklı sayı (4 byte).
+        double doubleVar = 3.14159265359; // Daha hassas ondalıklı sayı (8 byte).
+        char charVar = 'A';      // Tek karakter (2 byte).
+        string stringVar = "Merhaba Dünya"; // Metin.
+        bool boolVar = true;     // True veya false (1 byte).
+        DateTime dateTimeVar = DateTime.Now; // Şu anki tarih ve saat.
+
+        // Değerlerin Yazdırılması
+        Console.WriteLine("Byte: " + byteVar);
+        Console.WriteLine("Short: " + shortVar);
+        Console.WriteLine("Int: " + intVar);
+        Console.WriteLine("Long: " + longVar);
+        Console.WriteLine("Float: " + floatVar);
+        Console.WriteLine("Double: " + doubleVar);
+        Console.WriteLine("Char: " + charVar);
+        Console.WriteLine("String: " + stringVar);
+        Console.WriteLine("Bool: " + boolVar);
+        Console.WriteLine("DateTime: " + dateTimeVar);
+
+        // String Birleştirme
+        string firstName = "Ahmet";
+        string lastName = "Yılmaz";
+        string fullName = firstName + " " + lastName;
+        Console.WriteLine("Full Name: " + fullName);
+
+        // Matematiksel İşlemler
+        int a = 5, b = 10;
+        int sum = a + b;
+        int product = a * b;
+        Console.WriteLine("Sum: " + sum);
+        Console.WriteLine("Product: " + product);
+
+        // Object Kullanımı
+        object obj = "Bu bir obje";
+        Console.WriteLine("Object: " + obj);
+    }
+}
