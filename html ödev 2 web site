@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neşe Aybüke Öztürk</title>
+</head>
+<body>
+    <h1>Neşe Aybüke Öztrük</h1>
+
+    <h2>Hakkımda</h2>
+    <p>
+        Merhaba. Ben Neşe bilgisayar programcılığı okudum ama bu alanda çalışmadım şimdi hem bu alanda kendimi geliştirmek hem de bir iş gerekliliklerini karşılamak için bilgilerimi patika ile tazelemeye çalışıyorum 
+    </p>
+
+    <h2>İlgi Alanlarım</h2>
+    <ol>
+        <li>Film
+            <ul>
+                <li><a href="#">The Big Lebowski</a></li>
+                <li><a href="#">The Blues Brothers</a></li>
+                <li><a href="#">Neredesin Firuze</a></li>
+            </ul>
+        </li>
+        <li>Dizi
+            <ul>
+                <li><a href="#">Star Trek</a></li>
+                <li><a href="#">Battlestar Galactica</a></li>
+                <li><a href="#">The IT Crowd</a></li>
+            </ul>
+        </li>
+        <li>Kitap
+            <ul>
+                <li><a href="#">Yerdeniz</a></li>
+                <li><a href="#">Dune</a></li>
+                <li><a href="#">Androidler Elektrikli Koyun Düşler Mi?</a></li>
+            </ul>
+        </li>
+    </ol>
+
+    <h2>Sevdiğim Diziler</h2>
+    <h3>İlk ve Son</h3>
+    <img src="https://www.beyazperde.com/haberler/diziler/haberler-1000039334/ alt="Star Trek: The Next Generation" width="600">
+    <p>
+        lk ve Son : iki kişi arasındaki bozuk iletişimin ve travmaların ilişkiye yansıdıgında ne gibi sorunlar olabileceğini anlatan bir romantik dram filmi toplamda iki sezon yayınlandı. Ben daha çok birinci bölümünü seviyorum
+    </p>
+</body>
+</html>
