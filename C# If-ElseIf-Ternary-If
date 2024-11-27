@@ -1,0 +1,97 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("=== C# Dersleri: Var Kullanımı ve Zaman Tabanlı Selamlamalar ===");
+        Console.WriteLine("Seçim yapınız:");
+        Console.WriteLine("1 - var Kullanımı Örneği");
+        Console.WriteLine("2 - Zaman Tabanlı Selamlamalar (if/switch)");
+        Console.WriteLine("3 - Ternary Operatör ile Selamlamalar");
+
+        // Kullanıcının seçimini al
+        int choice = GetChoice();
+
+        switch (choice)
+        {
+            case 1:
+                VarUsageExample();
+                break;
+            case 2:
+                TimeBasedGreeting();
+                break;
+            case 3:
+                TernaryOperatorGreeting();
+                break;
+            default:
+                Console.WriteLine("Geçersiz seçim!");
+                break;
+        }
+
+        Console.WriteLine("Program sona erdi. Çıkmak için bir tuşa basın.");
+        Console.ReadKey();
+    }
+
+    // Kullanıcı seçim kontrolü
+    static int GetChoice()
+    {
+        int choice;
+        while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 3)
+        {
+            Console.WriteLine("Lütfen 1 ile 3 arasında bir seçim yapınız:");
+        }
+        return choice;
+    }
+
+    // 1. Örnek: var Kullanımı
+    static void VarUsageExample()
+    {
+        Console.WriteLine("\n=== var Kullanımı Örneği ===");
+        var message = "Merhaba, dünya!";
+        var number = 42;
+        var pi = 3.14;
+
+        Console.WriteLine($"Mesaj: {message}");
+        Console.WriteLine($"Sayı: {number}");
+        Console.WriteLine($"Pi Sayısı: {pi}");
+    }
+
+    // 2. Örnek: Zaman Tabanlı Selamlamalar (if/switch)
+    static void TimeBasedGreeting()
+    {
+        Console.WriteLine("\n=== Zaman Tabanlı Selamlamalar ===");
+        Console.WriteLine("Lütfen saati giriniz (0-23 arası):");
+        int hour;
+
+        // Saat giriş kontrolü
+        while (!int.TryParse(Console.ReadLine(), out hour) || hour < 0 || hour > 23)
+        {
+            Console.WriteLine("Geçerli bir saat giriniz (0-23 arası):");
+        }
+
+        // Switch ile saat dilimine göre mesaj
+        string greeting = hour switch
+        {
+            >= 6 and < 11 => "Günaydın!",
+            >= 11 and < 18 => "İyi Günler!",
+            _ => "İyi Geceler!"
+        };
+
+        Console.WriteLine($"Saat: {hour}, Selamlama: {greeting}");
+    }
+
+    // 3. Örnek: Ternary Operatör ile Selamlamalar
+    static void TernaryOperatorGreeting()
+    {
+        Console.WriteLine("\n=== Ternary Operatör ile Selamlamalar ===");
+        int hour = DateTime.Now.Hour; // Şu anki saat
+        Console.WriteLine($"Şu anki saat: {hour}");
+
+        string greeting = hour < 6 ? "İyi Geceler!" :
+                          hour < 11 ? "Günaydın!" :
+                          hour < 18 ? "İyi Günler!" : "İyi Geceler!";
+
+        Console.WriteLine($"Selamlama: {greeting}");
+    }
+}
