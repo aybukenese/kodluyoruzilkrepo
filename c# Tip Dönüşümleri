@@ -1,0 +1,55 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Tür Dönüşümleri Dersi Örneği");
+
+        // Bilinçsiz Tür Dönüşümü
+        short shortValue = 30;
+        int intValue = shortValue;
+        Console.WriteLine($"Bilinçsiz tür dönüşümü: short -> int = {intValue}");
+
+        // Bilinçli Tür Dönüşümü
+        double doubleValue = 10.5;
+        int intResult = (int)doubleValue;
+        Console.WriteLine($"Bilinçli tür dönüşümü: double -> int = {intResult}");
+
+        // Parse ile String'den Sayıya Dönüşüm
+        string strValue = "45";
+        int parsedValue = int.Parse(strValue);
+        Console.WriteLine($"Parse ile string -> int: {parsedValue}");
+
+        // Convert ile Dönüşüm
+        string strDouble = "12.34";
+        double convertedValue = Convert.ToDouble(strDouble);
+        Console.WriteLine($"Convert ile string -> double: {convertedValue}");
+
+        // Object Türü ile Dönüşüm
+        object objValue = "Bu bir object türüdür.";
+        string castedValue = objValue as string;
+        Console.WriteLine($"Object türünden string'e dönüştürüldü: {castedValue}");
+
+        // Metot Kullanımı
+        Console.WriteLine("\nMetot ile Dönüşüm Örneği");
+        string inputValue = "123";
+        int parsedInput = ParseStringToInt(inputValue);
+        Console.WriteLine($"Metotla string -> int: {parsedInput}");
+
+        Console.WriteLine("\nProgram sonlandı.");
+    }
+
+    static int ParseStringToInt(string input)
+    {
+        try
+        {
+            return int.Parse(input);
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Geçersiz formatta bir string verildi.");
+            return 0;
+        }
+    }
+}
