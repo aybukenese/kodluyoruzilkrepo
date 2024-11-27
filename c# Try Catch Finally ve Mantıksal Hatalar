@@ -1,0 +1,109 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Hata Yönetimi Örneklerine Hoş Geldiniz!");
+        Console.WriteLine("Lütfen bir örnek seçin:");
+        Console.WriteLine("1 - Temel try-catch Kullanımı");
+        Console.WriteLine("2 - Özel Exception Türleriyle Çalışma");
+        Console.WriteLine("3 - OverflowException Kullanımı");
+        Console.WriteLine("4 - Custom Error Mesajları");
+        
+        string choice = Console.ReadLine();
+
+        switch (choice)
+        {
+            case "1":
+                TryCatchExample();
+                break;
+            case "2":
+                SpecificExceptionExample();
+                break;
+            case "3":
+                OverflowExample();
+                break;
+            case "4":
+                CustomErrorExample();
+                break;
+            default:
+                Console.WriteLine("Geçersiz seçim.");
+                break;
+        }
+    }
+
+    static void TryCatchExample()
+    {
+        try
+        {
+            Console.WriteLine("Bir sayı girin:");
+            int number = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine($"Girdiğiniz sayı: {number}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Hata oluştu: {ex.Message}");
+        }
+        finally
+        {
+            Console.WriteLine("İşlem tamamlandı.");
+        }
+    }
+
+    static void SpecificExceptionExample()
+    {
+        try
+        {
+            string input = null;
+            int number = int.Parse(input); // Boş bir string, FormatException fırlatır.
+        }
+        catch (FormatException ex)
+        {
+            Console.WriteLine("Format hatası: Lütfen uygun bir sayı girin.");
+        }
+        catch (ArgumentNullException ex)
+        {
+            Console.WriteLine("Boş değer girdiniz.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Beklenmedik bir hata oluştu: {ex.Message}");
+        }
+    }
+
+    static void OverflowExample()
+    {
+        try
+        {
+            int number = int.Parse("123456789123456789"); // Çok büyük bir sayı.
+        }
+        catch (OverflowException ex)
+        {
+            Console.WriteLine("Girilen sayı çok büyük veya çok küçük!");
+        }
+        finally
+        {
+            Console.WriteLine("İşlem tamamlandı.");
+        }
+    }
+
+    static void CustomErrorExample()
+    {
+        try
+        {
+            Console.WriteLine("Bir sayı girin:");
+            int input = int.Parse(Console.ReadLine());
+            if (input < 0)
+                throw new ArgumentException("Negatif sayı girişi geçersizdir.");
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine($"Hata: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Beklenmeyen hata: {ex.Message}");
+        }
+    }
+}
