@@ -1,0 +1,22 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Lütfen bir sayı giriniz:");
+        int sayi = int.Parse(Console.ReadLine());
+        
+        int toplam = 0;
+        int sayac = 1;
+        
+        while (sayac <= sayi)
+        {
+            toplam += sayac;
+            sayac++;
+        }
+
+        double ortalama = (double)toplam / sayi;
+        Console.WriteLine($"Ortalama: {ortalama}");
+    }
+}
