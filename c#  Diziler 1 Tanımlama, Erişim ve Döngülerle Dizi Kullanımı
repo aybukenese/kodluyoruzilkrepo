@@ -1,0 +1,75 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // 1. Dizi Tanımlama ve Eleman Atama
+        string[] renkler = new string[5]; // Boyutu belli, elemanlar sonradan atanacak
+        renkler[0] = "Mavi";
+        renkler[1] = "Kırmızı";
+        renkler[2] = "Yeşil";
+        renkler[3] = "Sarı";
+        renkler[4] = "Turuncu";
+
+        string[] hayvanlar = { "Kedi", "Köpek", "Kuş", "Balık" }; // Boyutu ve elemanları belli
+
+        int[] sayilar = new int[3]; // Elemanlar sonradan atanacak
+        sayilar[0] = 10;
+        sayilar[1] = 20;
+        sayilar[2] = 30;
+
+        Console.WriteLine("--- Dizi Elemanlarına Erişim ---");
+        Console.WriteLine($"renkler[0]: {renkler[0]}");
+        Console.WriteLine($"hayvanlar[1]: {hayvanlar[1]}");
+        Console.WriteLine($"sayilar[2]: {sayilar[2]}");
+
+        // 2. Döngülerle Dizi Kullanımı
+        Console.WriteLine("\n--- Renkler Dizisi ---");
+        foreach (string renk in renkler)
+        {
+            Console.WriteLine(renk);
+        }
+
+        Console.WriteLine("\n--- Sayılar Dizisinin Toplamı ve Ortalaması ---");
+        int toplam = 0;
+        for (int i = 0; i < sayilar.Length; i++)
+        {
+            toplam += sayilar[i];
+        }
+        double ortalama = toplam / (double)sayilar.Length;
+        Console.WriteLine($"Toplam: {toplam}, Ortalama: {ortalama}");
+
+        // 3. Kullanıcıdan Veri Alarak Dizi İşlemleri
+        Console.WriteLine("\n--- Klavyeden Girilen Sayılarla İşlem ---");
+        Console.Write("Kaç sayı gireceksiniz? ");
+        int elemanSayisi = int.Parse(Console.ReadLine());
+        int[] dinamikDizi = new int[elemanSayisi];
+
+        for (int i = 0; i < elemanSayisi; i++)
+        {
+            Console.Write($"Lütfen {i + 1}. sayıyı giriniz: ");
+            dinamikDizi[i] = int.Parse(Console.ReadLine());
+        }
+
+        toplam = 0;
+        foreach (int sayi in dinamikDizi)
+        {
+            toplam += sayi;
+        }
+        ortalama = toplam / (double)elemanSayisi;
+        Console.WriteLine($"Girilen sayıların toplamı: {toplam}, Ortalama: {ortalama}");
+
+        // 4. Diziler Üzerinde İşlem: En Büyük ve En Küçük Eleman
+        int enBuyuk = dinamikDizi[0];
+        int enKucuk = dinamikDizi[0];
+        foreach (int sayi in dinamikDizi)
+        {
+            if (sayi > enBuyuk)
+                enBuyuk = sayi;
+            if (sayi < enKucuk)
+                enKucuk = sayi;
+        }
+        Console.WriteLine($"En büyük sayı: {enBuyuk}, En küçük sayı: {enKucuk}");
+    }
+}
