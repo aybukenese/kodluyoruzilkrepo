@@ -1,0 +1,67 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Merhaba! Döngü örneklerine hoş geldiniz.");
+        
+        // Örnek 1: 1'den girilen sayıya kadar olan tek sayıları yazdırma
+        Console.Write("Lütfen bir sayı giriniz: ");
+        int sayi = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("\n1'den {0}'a kadar olan tek sayılar:", sayi);
+        for (int i = 1; i <= sayi; i++)
+        {
+            if (i % 2 != 0)
+            {
+                Console.Write(i + " ");
+            }
+        }
+        Console.WriteLine("\n");
+
+        // Örnek 2: 1 ile girilen sayı arasındaki tek ve çift sayıların toplamını hesaplama
+        int tekToplam = 0, ciftToplam = 0;
+        for (int i = 1; i <= sayi; i++)
+        {
+            if (i % 2 == 0)
+            {
+                ciftToplam += i;
+            }
+            else
+            {
+                tekToplam += i;
+            }
+        }
+        Console.WriteLine($"1 ile {sayi} arasındaki tek sayıların toplamı: {tekToplam}");
+        Console.WriteLine($"1 ile {sayi} arasındaki çift sayıların toplamı: {ciftToplam}\n");
+
+        // Örnek 3: break ve continue kullanımı
+        Console.WriteLine("Break ve Continue Kullanımı:");
+        Console.WriteLine("Break ile döngüyü durdurma:");
+        for (int i = 1; i <= 10; i++)
+        {
+            if (i == 5)
+            {
+                Console.WriteLine("Döngü 5'e ulaştı, break ile sonlandırılıyor.");
+                break;
+            }
+            Console.Write(i + " ");
+        }
+        Console.WriteLine("\n");
+
+        Console.WriteLine("Continue ile döngüyü atlama:");
+        for (int i = 1; i <= 10; i++)
+        {
+            if (i == 5)
+            {
+                Console.WriteLine("5 atlandı, devam ediliyor.");
+                continue;
+            }
+            Console.Write(i + " ");
+        }
+        Console.WriteLine("\n");
+
+        Console.WriteLine("Program sona erdi. Teşekkürler!");
+    }
+}
