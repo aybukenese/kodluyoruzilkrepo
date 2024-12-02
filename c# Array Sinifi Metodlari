@@ -1,0 +1,58 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Dizi tanımlaması
+        int[] sayiDizisi = {23, 12, 86, 72, 3, 11, 17, 2, 4, 6, 8};
+
+        // 1. Adım: Diziyi yazdırma
+        Console.WriteLine("Dizi sırasız:");
+        foreach (int sayi in sayiDizisi)
+        {
+            Console.Write(sayi + " ");
+        }
+        Console.WriteLine();
+
+        // 2. Adım: Diziyi sıralama
+        Array.Sort(sayiDizisi);
+        Console.WriteLine("Sıralanmış dizi:");
+        foreach (int sayi in sayiDizisi)
+        {
+            Console.Write(sayi + " ");
+        }
+        Console.WriteLine();
+
+        // 3. Adım: Dizinin bir kısmını sıfırlama (örneğin 2. indexten başlayarak 2 eleman)
+        Array.Clear(sayiDizisi, 2, 2);
+        Console.WriteLine("Dizi sıfırlanmış hali:");
+        foreach (int sayi in sayiDizisi)
+        {
+            Console.Write(sayi + " ");
+        }
+        Console.WriteLine();
+
+        // 4. Adım: Diziyi tersine çevirme
+        Array.Reverse(sayiDizisi);
+        Console.WriteLine("Ters çevrilmiş dizi:");
+        foreach (int sayi in sayiDizisi)
+        {
+            Console.Write(sayi + " ");
+        }
+        Console.WriteLine();
+
+        // 5. Adım: Dizideki belirli bir elemanın indexini bulma
+        int index = Array.IndexOf(sayiDizisi, 23);
+        Console.WriteLine("23 sayısının dizideki indexi: " + index);
+
+        // 6. Adım: Dizinin boyutunu değiştirme
+        Array.Resize(ref sayiDizisi, 15); // Dizinin boyutunu 15'e çıkartıyoruz
+        Console.WriteLine("Dizi boyutu değiştirildikten sonra:");
+        foreach (int sayi in sayiDizisi)
+        {
+            Console.Write(sayi + " ");
+        }
+        Console.WriteLine();
+    }
+}
