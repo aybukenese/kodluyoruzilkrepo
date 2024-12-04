@@ -1,0 +1,30 @@
+using System;
+
+class Program
+{
+    // Geri dönüş değeri olan metot (iki sayıyı toplar)
+    public static int Topla(int sayi1, int sayi2)
+    {
+        return sayi1 + sayi2;
+    }
+
+    // Geri dönüş değeri olmayan metot (ekrana mesaj yazdırır)
+    public static void MesajYaz(string mesaj)
+    {
+        Console.WriteLine(mesaj);
+    }
+
+    static void Main(string[] args)
+    {
+        // Topla metodu çağırılır ve sonucu ekrana yazdırılır
+        int toplam = Topla(5, 10);
+        Console.WriteLine("Toplam: " + toplam);
+
+        // MesajYaz metodu çağırılır
+        MesajYaz("Merhaba, bu bir metod örneğidir!");
+
+        // Bir başka örnek: iki sayıyı toplama ve ekrana yazdırma
+        int sayi1 = 7, sayi2 = 13;
+        Console.WriteLine("Yeni Toplam: " + Topla(sayi1, sayi2));
+    }
+}
