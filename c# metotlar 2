@@ -1,0 +1,63 @@
+using System;
+
+class Program
+{
+    // Metin türünden bir sayıyı int'e dönüştürmek için TryParse örneği
+    public static void ConvertAndCheck(string input)
+    {
+        // TryParse yöntemi, dönüşümün başarılı olup olmadığını kontrol eder
+        if (int.TryParse(input, out int result))
+        {
+            Console.WriteLine($"Dönüşüm başarılı: {result}");
+        }
+        else
+        {
+            Console.WriteLine("Dönüşüm başarısız. Lütfen geçerli bir sayı girin.");
+        }
+    }
+
+    // Toplama işlemi yapan bir metot
+    public static int Topla(int sayi1, int sayi2)
+    {
+        return sayi1 + sayi2;
+    }
+
+    // Ekrana yazdırmak için bir metot (overloading örneği)
+    public static void Yazdir(string mesaj)
+    {
+        Console.WriteLine(mesaj);
+    }
+
+    public static void Yazdir(int sayi)
+    {
+        Console.WriteLine($"Sayı: {sayi}");
+    }
+
+    public static void Yazdir(string metin1, string metin2)
+    {
+        Console.WriteLine($"{metin1} {metin2}");
+    }
+
+    static void Main(string[] args)
+    {
+        // TryParse örneği
+        string sayiStr = "999";
+        ConvertAndCheck(sayiStr);
+
+        // Toplama metodu örneği
+        int sonuc = Topla(10, 20);
+        Console.WriteLine($"Toplama sonucu: {sonuc}");
+
+        // Overload edilmiş metotları çağırma
+        Yazdir("Merhaba, bu bir mesajdır.");
+        Yazdir(42);
+        Yazdir("Metin1", "Metin2");
+
+        // Yeni bir metot aşırı yükleme denemesi
+        string str1 = "Hello";
+        string str2 = "World!";
+        Yazdir(str1, str2);
+
+        Console.WriteLine("Program tamamlandı.");
+    }
+}
