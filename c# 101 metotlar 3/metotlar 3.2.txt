@@ -1,0 +1,50 @@
+using System;
+using System.Linq;
+
+public static class ExtensionMethods
+{
+    // String içinde boşluk kontrolü
+    public static bool ContainsSpaces(this string str)
+    {
+        return str.Contains(" ");
+    }
+
+    // String'deki tüm boşlukları kaldır
+    public static string RemoveSpaces(this string str)
+    {
+        return string.Join("", str.Split(' '));
+    }
+
+    // Integer dizisini sıralar
+    public static int[] SortArray(this int[] array)
+    {
+        return array.OrderBy(x => x).ToArray();
+    }
+
+    // Bir sayının asal olup olmadığını kontrol eder
+    public static bool IsPrime(this int number)
+    {
+        if (number <= 1) return false;
+        for (int i = 2; i <= Math.Sqrt(number); i++)
+        {
+            if (number % i == 0) return false;
+        }
+        return true;
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        string sentence = "Merhaba dünya";
+        Console.WriteLine($"Cümle boşluk içeriyor mu? {sentence.ContainsSpaces()}");
+        Console.WriteLine($"Boşlukları kaldırılmış: {sentence.RemoveSpaces()}");
+
+        int[] numbers = { 9, 6, 2, 1, 5 };
+        Console.WriteLine("Sıralanmış dizi: " + string.Join(", ", numbers.SortArray()));
+
+        int number = 17;
+        Console.WriteLine($"{number} asal mı? {number.IsPrime()}");
+    }
+}
