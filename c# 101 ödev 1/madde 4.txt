@@ -1,0 +1,22 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Bir cümle yazın: ");
+        string cumle = Console.ReadLine();
+
+        string[] kelimeler = cumle.Split(new[] { ' ', '.', ',', ';', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
+        int kelimeSayisi = kelimeler.Length;
+        int harfSayisi = 0;
+
+        foreach (var kelime in kelimeler)
+        {
+            harfSayisi += kelime.Length;
+        }
+
+        Console.WriteLine($"Toplam kelime sayısı: {kelimeSayisi}");
+        Console.WriteLine($"Toplam harf sayısı: {harfSayisi}");
+    }
+}

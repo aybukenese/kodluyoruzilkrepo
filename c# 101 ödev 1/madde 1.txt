@@ -1,0 +1,21 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Pozitif bir sayı girin (n): ");
+        int n = int.Parse(Console.ReadLine());
+
+        Console.WriteLine($"{n} adet pozitif sayı giriniz:");
+
+        for (int i = 0; i < n; i++)
+        {
+            int sayi = int.Parse(Console.ReadLine());
+            if (sayi % 2 == 0)
+            {
+                Console.WriteLine(sayi);
+            }
+        }
+    }
+}

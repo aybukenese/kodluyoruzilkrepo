@@ -1,0 +1,24 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Pozitif bir sayı girin (n): ");
+        int n = int.Parse(Console.ReadLine());
+
+        Console.WriteLine($"{n} adet kelime giriniz:");
+
+        string[] kelimeler = new string[n];
+        for (int i = 0; i < n; i++)
+        {
+            kelimeler[i] = Console.ReadLine();
+        }
+
+        Console.WriteLine("Kelimenin sondan başa doğru yazılmış hali:");
+        for (int i = n - 1; i >= 0; i--)
+        {
+            Console.WriteLine(kelimeler[i]);
+        }
+    }
+}
