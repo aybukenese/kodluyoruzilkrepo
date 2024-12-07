@@ -1,0 +1,48 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Bugünün tarihi
+        DateTime now = DateTime.Now;
+        Console.WriteLine("Bugünün tarihi: " + now.ToString("dd/MM/yyyy"));
+        Console.WriteLine("Bugün: " + now.DayOfWeek);
+        Console.WriteLine("Saat: " + now.ToString("HH:mm:ss"));
+        Console.WriteLine("Yılın gün sayısı: " + now.DayOfYear);
+        Console.WriteLine();
+
+        // Bir tarihe gün ekleme
+        DateTime newDate = now.AddDays(5); // 5 gün ekleme
+        Console.WriteLine("Bugün: " + now.ToString("dd/MM/yyyy"));
+        Console.WriteLine("Yeni Tarih: " + newDate.ToString("dd/MM/yyyy"));
+        Console.WriteLine();
+
+        // Mutlak değer
+        int negativeValue = -15;
+        int absoluteValue = Math.Abs(negativeValue);
+        Console.WriteLine("Mutlak Değer: " + absoluteValue);
+        Console.WriteLine();
+
+        // Yuvarlama (Round ve Floor)
+        double value1 = 22.3;
+        double value2 = 22.7;
+        Console.WriteLine("Round 22.3: " + Math.Round(value1)); // 22
+        Console.WriteLine("Round 22.7: " + Math.Round(value2)); // 23
+        Console.WriteLine("Floor 22.7: " + Math.Floor(value2)); // 22
+        Console.WriteLine();
+
+        // Logaritma
+        double logValue = 100;
+        Console.WriteLine("Doğal Logaritma (taban e): " + Math.Log(logValue));
+        Console.WriteLine("Logaritma (taban 10): " + Math.Log10(logValue));
+        Console.WriteLine("Logaritma (taban 2): " + Math.Log(logValue, 2));
+        Console.WriteLine();
+
+        // Max ve Min Fonksiyonları
+        int num1 = 5;
+        int num2 = 10;
+        Console.WriteLine("En Büyük Sayı: " + Math.Max(num1, num2)); // 10
+        Console.WriteLine("En Küçük Sayı: " + Math.Min(num1, num2)); // 5
+    }
+}
