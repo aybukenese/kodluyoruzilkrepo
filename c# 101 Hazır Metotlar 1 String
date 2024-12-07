@@ -1,0 +1,54 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Temel değişken tanımlamaları
+        string ders = "Dersimiz Sharp. Hoş geldiniz.";
+        
+        // 1. Length: Metnin toplam uzunluğunu bulma
+        Console.WriteLine("Metnin uzunluğu: " + ders.Length);
+
+        // 2. ToUpper ve ToLower: Tüm harfleri büyük ve küçük yapmak
+        Console.WriteLine("Tümü büyük: " + ders.ToUpper());
+        Console.WriteLine("Tümü küçük: " + ders.ToLower());
+
+        // 3. Concat: İki metni birleştirme
+        Console.WriteLine("Birleştirme: " + string.Concat(ders, " Merhaba!"));
+
+        // 4. CompareTo: İki metni karşılaştırma
+        string metin1 = "Dersimiz Sharp";
+        string metin2 = "dersimiz sharp";
+        Console.WriteLine("CompareTo Sonucu: " + metin1.CompareTo(metin2)); // Büyük harf-küçük harf duyarlı
+
+        // 5. Compare: Harf duyarlı veya duyarsız karşılaştırma
+        Console.WriteLine("Compare (Harf duyarlı): " + string.Compare(metin1, metin2, false));
+        Console.WriteLine("Compare (Harf duyarsız): " + string.Compare(metin1, metin2, true));
+
+        // 6. Contains: Metnin içinde belirli bir ifade var mı?
+        Console.WriteLine("Contains 'Sharp': " + ders.Contains("Sharp"));
+
+        // 7. StartsWith ve EndsWith: Metnin başlangıcı ve sonu belirli bir ifadeyle eşleşiyor mu?
+        Console.WriteLine("StartsWith 'Dersimiz': " + ders.StartsWith("Dersimiz"));
+        Console.WriteLine("EndsWith 'geldiniz.': " + ders.EndsWith("geldiniz."));
+
+        // 8. IndexOf ve LastIndexOf: Belirli bir karakterin/metnin ilk ve son konumu
+        Console.WriteLine("IndexOf 'Sharp': " + ders.IndexOf("Sharp"));
+        Console.WriteLine("LastIndexOf 'i': " + ders.LastIndexOf('i'));
+
+        // 9. Insert ve Remove: Metne ekleme ve belirli bir kısmını çıkarma
+        Console.WriteLine("Insert: " + ders.Insert(0, "Merhaba! "));
+        Console.WriteLine("Remove: " + ders.Remove(10, 5));
+
+        // 10. Replace: Metindeki ifadeleri değiştirme
+        Console.WriteLine("Replace boşluklar: " + ders.Replace(" ", "*"));
+
+        // 11. Split: Metni belirli bir karaktere göre parçalama
+        string[] parcalar = ders.Split(' ');
+        Console.WriteLine("Split ile parçalama - İlk kelime: " + parcalar[0]);
+
+        // 12. Substring: Metnin belirli bir kısmını alma
+        Console.WriteLine("Substring (Başlangıç: 10, Uzunluk: 5): " + ders.Substring(10, 5));
+    }
+}
