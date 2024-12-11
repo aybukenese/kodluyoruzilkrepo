@@ -1,0 +1,60 @@
+// Hesap Makinesi Akıllı Sözleşmesi
+
+actor HesapMakinesi {
+    // Değişkenler
+    var hucre: Int = 0;
+
+    // Toplama Fonksiyonu
+    public func toplama(sayi: Int): Int {
+        hucre := hucre + sayi;
+        return hucre;
+    }
+
+    // Çıkarma Fonksiyonu
+    public func cikarma(sayi: Int): Int {
+        hucre := hucre - sayi;
+        return hucre;
+    }
+
+    // Çarpma Fonksiyonu
+    public func carpma(sayi: Int): Int {
+        hucre := hucre * sayi;
+        return hucre;
+    }
+
+    // Bölme Fonksiyonu
+    public func bolme(sayi: Int): Int {
+        if sayi == 0 {
+            return 0; // 0 ile bölme hatası
+        } else {
+            hucre := hucre / sayi;
+            return hucre;
+        }
+    }
+
+    // Temizleme Fonksiyonu
+    public func temizle() {
+        hucre := 0;
+    }
+};
+
+// Main işlevi
+public func main() {
+    let hesap = HesapMakinesi();
+
+    // Toplama işlemi
+    debug print("Toplama Sonucu: " # Int.toText(hesap.toplama(5)));
+
+    // Çıkarma işlemi
+    debug print("Çıkarma Sonucu: " # Int.toText(hesap.cikarma(3)));
+
+    // Çarpma işlemi
+    debug print("Çarpma Sonucu: " # Int.toText(hesap.carpma(2)));
+
+    // Bölme işlemi
+    debug print("Bölme Sonucu: " # Int.toText(hesap.bolme(2)));
+
+    // Temizleme işlemi
+    hesap.temizle();
+    debug print("Temizlenen Değer: " # Int.toText(hesap.hucre));
+};
