@@ -1,0 +1,283 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Program
+{
+    static void Main()
+    {
+        var todoBoard = new TodoBoard();
+        todoBoard.AddInitialCards();  // Başlangıçta 3 kart eklenir.
+
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("Lütfen yapmak istediğiniz işlemi seçiniz :)");
+            Console.WriteLine("*******************************************");
+            Console.WriteLine("(1) Board Listelemek");
+            Console.WriteLine("(2) Board'a Kart Eklemek");
+            Console.WriteLine("(3) Board'dan Kart Silmek");
+            Console.WriteLine("(4) Kart Taşımak");
+            Console.WriteLine("(Q) Çıkış");
+
+            string choice = Console.ReadLine().ToUpper();
+
+            switch (choice)
+            {
+                case "1":
+                    todoBoard.ListBoard();
+                    break;
+                case "2":
+                    todoBoard.AddCard();
+                    break;
+                case "3":
+                    todoBoard.DeleteCard();
+                    break;
+                case "4":
+                    todoBoard.MoveCard();
+                    break;
+                case "Q":
+                    return;
+                default:
+                    Console.WriteLine("Geçersiz seçim, tekrar deneyin.");
+                    break;
+            }
+        }
+    }
+}
+
+public enum CardSize
+{
+    XS = 1,
+    S = 2,
+    M = 3,
+    L = 4,
+    XL = 5
+}
+
+public class TeamMember
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public TeamMember(int id, string name)
+    {
+        Id = id;
+        Name = name;
+    }
+}
+
+public class Card
+{
+    public string Title { get; set; }
+    public string Content { get; set; }
+    public TeamMember AssignedTo { get; set; }
+    public CardSize Size { get; set; }
+    public string Line { get; set; }
+
+    public Card(string title, string content, TeamMember assignedTo, CardSize size, string line)
+    {
+        Title = title;
+        Content = content;
+        AssignedTo = assignedTo;
+        Size = size;
+        Line = line;
+    }
+
+    public override string ToString()
+    {
+        return $"Başlık: {Title} | İçerik: {Content} | Atanan Kişi: {AssignedTo.Name} | Büyüklük: {Size} | Line: {Line}";
+    }
+}
+
+public class TodoBoard
+{
+    private List<Card> todoLine;
+    private List<Card> inProgressLine;
+    private List<Card> doneLine;
+    private List<TeamMember> teamMembers;
+
+    public TodoBoard()
+    {
+        todoLine = new List<Card>();
+        inProgressLine = new List<Card>();
+        doneLine = new List<Card>();
+        teamMembers = new List<TeamMember>
+        {
+            new TeamMember(1, "Ali"),
+            new TeamMember(2, "Ayşe"),
+            new TeamMember(3, "Fatma"),
+            new TeamMember(4, "Mehmet")
+        };
+    }
+
+    public void AddInitialCards()
+    {
+        var ali = teamMembers.First(t => t.Name == "Ali");
+        var ayse = teamMembers.First(t => t.Name == "Ayşe");
+
+        todoLine.Add(new Card("Kart 1", "İlk kartın içeriği", ali, CardSize.M, "TODO"));
+        inProgressLine.Add(new Card("Kart 2", "İkinci kartın içeriği", ayse, CardSize.L, "IN PROGRESS"));
+        doneLine.Add(new Card("Kart 3", "Üçüncü kartın içeriği", ali, CardSize.S, "DONE"));
+    }
+
+    public void ListBoard()
+    {
+        Console.WriteLine("TODO Line");
+        Console.WriteLine("************************");
+        foreach (var card in todoLine)
+        {
+            Console.WriteLine(card);
+        }
+
+        Console.WriteLine("\nIN PROGRESS Line");
+        Console.WriteLine("************************");
+        foreach (var card in inProgressLine)
+        {
+            Console.WriteLine(card);
+        }
+
+        Console.WriteLine("\nDONE Line");
+        Console.WriteLine("************************");
+        foreach (var card in doneLine)
+        {
+            Console.WriteLine(card);
+        }
+    }
+
+    public void AddCard()
+    {
+        Console.Write("Başlık Giriniz: ");
+        string title = Console.ReadLine();
+
+        Console.Write("İçerik Giriniz: ");
+        string content = Console.ReadLine();
+
+        Console.WriteLine("Büyüklük Seçiniz -> XS(1), S(2), M(3), L(4), XL(5): ");
+        CardSize size;
+        while (!Enum.TryParse(Console.ReadLine(), out size) || !Enum.IsDefined(typeof(CardSize), size))
+        {
+            Console.WriteLine("Geçersiz seçim! Lütfen geçerli bir büyüklük seçin.");
+        }
+
+        Console.WriteLine("Kişi Seçiniz:");
+        foreach (var member in teamMembers)
+        {
+            Console.WriteLine($"{member.Id}: {member.Name}");
+        }
+
+        int selectedId;
+        while (!int.TryParse(Console.ReadLine(), out selectedId) || !teamMembers.Any(t => t.Id == selectedId))
+        {
+            Console.WriteLine("Geçersiz ID! Lütfen geçerli bir ID girin.");
+        }
+
+        var selectedMember = teamMembers.First(t => t.Id == selectedId);
+
+        Console.WriteLine("Kart hangi Line'a eklenecek?");
+        Console.WriteLine("1: TODO | 2: IN PROGRESS | 3: DONE");
+        string lineChoice = Console.ReadLine();
+
+        string line = lineChoice switch
+        {
+            "1" => "TODO",
+            "2" => "IN PROGRESS",
+            "3" => "DONE",
+            _ => throw new ArgumentException("Geçersiz seçim")
+        };
+
+        var newCard = new Card(title, content, selectedMember, size, line);
+        if (line == "TODO")
+            todoLine.Add(newCard);
+        else if (line == "IN PROGRESS")
+            inProgressLine.Add(newCard);
+        else if (line == "DONE")
+            doneLine.Add(newCard);
+
+        Console.WriteLine("Kart başarıyla eklendi.");
+    }
+
+    public void DeleteCard()
+    {
+        Console.Write("Lütfen kart başlığını yazınız: ");
+        string title = Console.ReadLine();
+
+        var cardsToDelete = todoLine.Concat(inProgressLine).Concat(doneLine)
+            .Where(c => c.Title.Contains(title, StringComparison.OrdinalIgnoreCase)).ToList();
+
+        if (cardsToDelete.Count == 0)
+        {
+            Console.WriteLine("Aradığınız kart board'da bulunamadı.");
+            return;
+        }
+
+        foreach (var card in cardsToDelete)
+        {
+            Console.WriteLine(card);
+        }
+
+        Console.WriteLine("Kart(lar) silinsin mi? (y/n)");
+        string confirmation = Console.ReadLine().ToLower();
+        if (confirmation == "y")
+        {
+            todoLine.RemoveAll(c => cardsToDelete.Contains(c));
+            inProgressLine.RemoveAll(c => cardsToDelete.Contains(c));
+            doneLine.RemoveAll(c => cardsToDelete.Contains(c));
+
+            Console.WriteLine("Kart(lar) başarıyla silindi.");
+        }
+    }
+
+    public void MoveCard()
+    {
+        Console.Write("Lütfen kart başlığını yazınız: ");
+        string title = Console.ReadLine();
+
+        var cardToMove = todoLine.Concat(inProgressLine).Concat(doneLine)
+            .FirstOrDefault(c => c.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
+
+        if (cardToMove == null)
+        {
+            Console.WriteLine("Aradığınız kart board'da bulunamadı.");
+            return;
+        }
+
+        Console.WriteLine($"Bulunan Kart Bilgileri:\n{cardToMove}");
+        Console.WriteLine("Lütfen taşımak istediğiniz Line'ı seçiniz:");
+        Console.WriteLine("1: TODO | 2: IN PROGRESS | 3: DONE");
+        string lineChoice = Console.ReadLine();
+
+        string newLine = lineChoice switch
+        {
+            "1" => "TODO",
+            "2" => "IN PROGRESS",
+            "3" => "DONE",
+            _ => throw new ArgumentException("Geçersiz seçim")
+        };
+
+        if (cardToMove.Line == newLine)
+        {
+            Console.WriteLine("Kart zaten bu Line'da.");
+            return;
+        }
+
+        // Kartı eski listeden çıkar
+        if (cardToMove.Line == "TODO")
+            todoLine.Remove(cardToMove);
+        else if (cardToMove.Line == "IN PROGRESS")
+            inProgressLine.Remove(cardToMove);
+        else if (cardToMove.Line == "DONE")
+            doneLine.Remove(cardToMove);
+
+        // Kartı yeni line'a ekle
+        cardToMove.Line = newLine;
+        if (newLine == "TODO")
+            todoLine.Add(cardToMove);
+        else if (newLine == "IN PROGRESS")
+            inProgressLine.Add(cardToMove);
+        else if (newLine == "DONE")
+            doneLine.Add(cardToMove);
+
+        Console.WriteLine("Kart başarıyla taşındı.");
+    }
+}
