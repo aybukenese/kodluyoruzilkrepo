@@ -1,0 +1,42 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int[] sayilar = new int[20];
+        for (int i = 0; i < 20; i++)
+        {
+            Console.Write("Bir sayı girin: ");
+            while (!int.TryParse(Console.ReadLine(), out sayilar[i]))
+            {
+                Console.WriteLine("Geçersiz giriş. Lütfen bir sayı girin.");
+            }
+        }
+
+        Array.Sort(sayilar);
+
+        int[] enKucuk3 = new int[3];
+        int[] enBuyuk3 = new int[3];
+
+        Array.Copy(sayilar, enKucuk3, 3);
+        Array.Copy(sayilar, sayilar.Length - 3, enBuyuk3, 0, 3);
+
+        double enKucuk3Ortalama = GetAverage(enKucuk3);
+        double enBuyuk3Ortalama = GetAverage(enBuyuk3);
+
+        Console.WriteLine($"En Küçük 3 Sayı: {string.Join(", ", enKucuk3)} - Ortalama: {enKucuk3Ortalama}");
+        Console.WriteLine($"En Büyük 3 Sayı: {string.Join(", ", enBuyuk3)} - Ortalama: {enBuyuk3Ortalama}");
+        Console.WriteLine($"Ortalama Toplamı: {enKucuk3Ortalama + enBuyuk3Ortalama}");
+    }
+
+    static double GetAverage(int[] array)
+    {
+        double sum = 0;
+        foreach (int number in array)
+        {
+            sum += number;
+        }
+        return sum / array.Length;
+    }
+}

@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Bir cümle girin: ");
+        string cumle = Console.ReadLine().ToLower();
+
+        List<char> sesliHarfler = new List<char>();
+        foreach (char karakter in cumle)
+        {
+            if ("aeiou".Contains(karakter))
+            {
+                sesliHarfler.Add(karakter);
+            }
+        }
+
+        sesliHarfler.Sort();
+
+        Console.WriteLine("Sesli harfler (sıralı): " + string.Join(", ", sesliHarfler));
+    }
+}
