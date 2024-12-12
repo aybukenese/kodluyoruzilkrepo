@@ -1,0 +1,35 @@
+using System;
+
+public enum Gunler
+{
+    Pazartesi = 1,
+    Salı = 2,
+    Çarşamba = 3,
+    Perşembe = 4,
+    Cuma = 5,
+    Cumartesi = 6,
+    Pazar = 7
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        // Enum'dan değer alma
+        Gunler bugun = Gunler.Cuma;
+        Console.WriteLine("Bugün: " + bugun);  // Çıktı: Cuma
+
+        // Enum değerini int'e çevirme
+        int gunIndeksi = (int)Gunler.Pazar;
+        Console.WriteLine("Pazarın indeksi: " + gunIndeksi);  // Çıktı: 7
+
+        // Enum değerini kullanarak bir kontrol yapma
+        if (bugun == Gunler.Cuma)
+        {
+            Console.WriteLine("Bugün Cuma! Hafta sonu yaklaşıyor.");
+        }
+
+        // Sabit değerleri daha anlamlı bir şekilde kullanma
+        Console.WriteLine($"Çarşamba'nın indeksi: {(int)Gunler.Çarşamba}");  // Çıktı: 3
+    }
+}
