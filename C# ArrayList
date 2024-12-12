@@ -1,0 +1,65 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Herkese merhaba arkadaşlar! Bu dersimizde List koleksiyonlarını öğreneceğiz.");
+
+        // Liste oluşturma
+        List<int> sayilar = new List<int>();
+        Console.WriteLine("Bir liste oluşturduk ve şimdi eleman ekleyeceğiz.");
+
+        // Eleman ekleme
+        sayilar.Add(22);
+        sayilar.Add(33);
+        sayilar.Add(7);
+        sayilar.Add(9);
+        Console.WriteLine("Listeye şu elemanları ekledik: 22, 33, 7, 9");
+
+        // Elemanlara erişim
+        Console.WriteLine("Liste elemanlarına indeks ile erişebiliriz. Örneğin, ikinci eleman: " + sayilar[1]);
+
+        // Foreach ile liste elemanlarını yazdırma
+        Console.WriteLine("Liste elemanlarını foreach döngüsü ile yazdıralım:");
+        foreach (var sayi in sayilar)
+        {
+            Console.WriteLine(sayi);
+        }
+
+        // Eleman çıkarma
+        sayilar.Remove(7);
+        Console.WriteLine("Listeden 7 elemanını çıkardık.");
+
+        // Listeye birden fazla eleman ekleme
+        List<int> yeniSayilar = new List<int> { 44, 55, 66 };
+        sayilar.AddRange(yeniSayilar);
+        Console.WriteLine("Yeni elemanları listeye toplu şekilde ekledik: 44, 55, 66");
+
+        // Liste elemanlarını sıralama
+        sayilar.Sort();
+        Console.WriteLine("Listeyi sıraladık (küçükten büyüğe):");
+        foreach (var sayi in sayilar)
+        {
+            Console.WriteLine(sayi);
+        }
+
+        // Listeyi ters çevirme
+        sayilar.Reverse();
+        Console.WriteLine("Listeyi ters çevirdik (büyükten küçüğe):");
+        foreach (var sayi in sayilar)
+        {
+            Console.WriteLine(sayi);
+        }
+
+        // Eleman arama
+        Console.WriteLine("Listede 33 var mı? " + (sayilar.Contains(33) ? "Evet" : "Hayır"));
+
+        // Listeyi temizleme
+        sayilar.Clear();
+        Console.WriteLine("Listeyi temizledik. Şu anki eleman sayısı: " + sayilar.Count);
+
+        Console.WriteLine("Dinlediğiniz için teşekkür ederim, arkadaşlar! Bu kadar.");
+    }
+}
