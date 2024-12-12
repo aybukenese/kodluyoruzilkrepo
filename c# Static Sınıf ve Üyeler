@@ -1,0 +1,56 @@
+using System;
+
+public class Calisan
+{
+    // Statik alan
+    private static int calisanSayisi = 0;
+
+    // Statik olmayan alanlar
+    private string isim;
+    private string soyisim;
+    private string departman;
+
+    // Statik olmayan kurucu
+    public Calisan(string isim, string soyisim, string departman)
+    {
+        this.isim = isim;
+        this.soyisim = soyisim;
+        this.departman = departman;
+        calisanSayisi++;  // Her yeni çalışanla çalışan sayısı artacak
+    }
+
+    // Statik özellik
+    public static int CalisanSayisi
+    {
+        get { return calisanSayisi; }
+    }
+
+    // Statik metod
+    public static void StatikMetod()
+    {
+        Console.WriteLine("Statik metod çalıştı.");
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        // Başlangıçta çalışan sayısı 0
+        Console.WriteLine("Başlangıçtaki çalışan sayısı: " + Calisan.CalisanSayisi);
+
+        // Çalışan nesneleri oluşturuluyor
+        Calisan calisan1 = new Calisan("Ayşe", "Yılmaz", "İnsan Kaynakları");
+        Calisan calisan2 = new Calisan("Deniz", "Arda", "Finans");
+
+        // Yeni çalışanlar eklendikçe çalışan sayısı artacak
+        Console.WriteLine("Çalışan sayısı: " + Calisan.CalisanSayisi);
+
+        // Statik metod çağrısı
+        Calisan.StatikMetod();
+
+        // Çalışan bilgilerini yazdırma
+        Console.WriteLine("Çalışan 1: " + calisan1.CalisanSayisi);
+        Console.WriteLine("Çalışan 2: " + calisan2.CalisanSayisi);
+    }
+}
