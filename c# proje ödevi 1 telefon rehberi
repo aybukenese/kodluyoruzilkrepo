@@ -1,0 +1,225 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Program
+{
+    static void Main()
+    {
+        var phoneBook = new PhoneBook();
+        phoneBook.AddInitialContacts();  // Başlangıçta 5 kişi eklenir.
+
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("Lütfen yapmak istediğiniz işlemi seçiniz :)");
+            Console.WriteLine("*******************************************");
+            Console.WriteLine("(1) Yeni Numara Kaydetmek");
+            Console.WriteLine("(2) Varolan Numarayı Silmek");
+            Console.WriteLine("(3) Varolan Numarayı Güncelleme");
+            Console.WriteLine("(4) Rehberi Listelemek");
+            Console.WriteLine("(5) Rehberde Arama Yapmak");
+            Console.WriteLine("(Q) Çıkış");
+
+            string choice = Console.ReadLine().ToUpper();
+
+            switch (choice)
+            {
+                case "1":
+                    phoneBook.AddNewContact();
+                    break;
+                case "2":
+                    phoneBook.DeleteContact();
+                    break;
+                case "3":
+                    phoneBook.UpdateContact();
+                    break;
+                case "4":
+                    phoneBook.ListContacts();
+                    break;
+                case "5":
+                    phoneBook.SearchContact();
+                    break;
+                case "Q":
+                    return;
+                default:
+                    Console.WriteLine("Geçersiz seçim, tekrar deneyin.");
+                    break;
+            }
+        }
+    }
+}
+
+public class PhoneBook
+{
+    private List<Contact> contacts;
+
+    public PhoneBook()
+    {
+        contacts = new List<Contact>();
+    }
+
+    public void AddInitialContacts()
+    {
+        contacts.Add(new Contact("Ahmet", "Yılmaz", "5551234567"));
+        contacts.Add(new Contact("Mehmet", "Kaya", "5552345678"));
+        contacts.Add(new Contact("Ayşe", "Demir", "5553456789"));
+        contacts.Add(new Contact("Fatma", "Kurt", "5554567890"));
+        contacts.Add(new Contact("Ali", "Çelik", "5555678901"));
+    }
+
+    public void AddNewContact()
+    {
+        Console.Write("Lütfen isim giriniz: ");
+        string firstName = Console.ReadLine();
+
+        Console.Write("Lütfen soyisim giriniz: ");
+        string lastName = Console.ReadLine();
+
+        Console.Write("Lütfen telefon numarası giriniz: ");
+        string phoneNumber = Console.ReadLine();
+
+        var newContact = new Contact(firstName, lastName, phoneNumber);
+        contacts.Add(newContact);
+        Console.WriteLine("Yeni numara başarıyla kaydedildi.");
+    }
+
+    public void DeleteContact()
+    {
+        Console.Write("Lütfen numarasını silmek istediğiniz kişinin adını ya da soyadını giriniz: ");
+        string nameToDelete = Console.ReadLine();
+
+        var foundContacts = contacts.Where(c => c.FirstName.Contains(nameToDelete) || c.LastName.Contains(nameToDelete)).ToList();
+
+        if (foundContacts.Count == 0)
+        {
+            Console.WriteLine("Aradığınız kriterlere uygun veri rehberde bulunamadı.");
+            Console.WriteLine("1. Silmeyi sonlandırmak için");
+            Console.WriteLine("2. Yeniden denemek için");
+            string retryChoice = Console.ReadLine();
+            if (retryChoice == "2")
+                DeleteContact();
+        }
+        else
+        {
+            Console.WriteLine($"Aşağıdaki kişi rehberden silinmek üzere:");
+            foreach (var contact in foundContacts)
+            {
+                Console.WriteLine(contact);
+            }
+
+            Console.WriteLine("Onaylıyor musunuz? (y/n)");
+            string confirmation = Console.ReadLine().ToLower();
+            if (confirmation == "y")
+            {
+                contacts.Remove(foundContacts.First());
+                Console.WriteLine("Kişi rehberden silindi.");
+            }
+        }
+    }
+
+    public void UpdateContact()
+    {
+        Console.Write("Lütfen numarasını güncellemek istediğiniz kişinin adını ya da soyadını giriniz: ");
+        string nameToUpdate = Console.ReadLine();
+
+        var foundContacts = contacts.Where(c => c.FirstName.Contains(nameToUpdate) || c.LastName.Contains(nameToUpdate)).ToList();
+
+        if (foundContacts.Count == 0)
+        {
+            Console.WriteLine("Aradığınız kriterlere uygun veri rehberde bulunamadı.");
+            Console.WriteLine("1. Güncellemeyi sonlandırmak için");
+            Console.WriteLine("2. Yeniden denemek için");
+            string retryChoice = Console.ReadLine();
+            if (retryChoice == "2")
+                UpdateContact();
+        }
+        else
+        {
+            Console.WriteLine("Güncellemek istediğiniz kişinin yeni bilgilerini giriniz.");
+            foreach (var contact in foundContacts)
+            {
+                Console.WriteLine(contact);
+            }
+
+            Console.Write("Yeni telefon numarasını giriniz: ");
+            string newPhoneNumber = Console.ReadLine();
+
+            var contactToUpdate = foundContacts.First();
+            contactToUpdate.PhoneNumber = newPhoneNumber;
+
+            Console.WriteLine("Telefon numarası başarıyla güncellendi.");
+        }
+    }
+
+    public void ListContacts()
+    {
+        Console.WriteLine("Telefon Rehberi");
+        Console.WriteLine("**********************************************");
+        foreach (var contact in contacts)
+        {
+            Console.WriteLine(contact);
+        }
+    }
+
+    public void SearchContact()
+    {
+        Console.WriteLine("Arama yapmak istediğiniz tipi seçiniz.");
+        Console.WriteLine("**********************************************");
+        Console.WriteLine("İsim veya soyisime göre arama yapmak için: (1)");
+        Console.WriteLine("Telefon numarasına göre arama yapmak için: (2)");
+
+        string choice = Console.ReadLine();
+
+        if (choice == "1")
+        {
+            Console.Write("İsim veya soyisim giriniz: ");
+            string searchTerm = Console.ReadLine();
+            var foundContacts = contacts.Where(c => c.FirstName.Contains(searchTerm) || c.LastName.Contains(searchTerm)).ToList();
+            DisplaySearchResults(foundContacts);
+        }
+        else if (choice == "2")
+        {
+            Console.Write("Telefon numarası giriniz: ");
+            string phoneNumber = Console.ReadLine();
+            var foundContacts = contacts.Where(c => c.PhoneNumber.Contains(phoneNumber)).ToList();
+            DisplaySearchResults(foundContacts);
+        }
+    }
+
+    private void DisplaySearchResults(List<Contact> foundContacts)
+    {
+        if (foundContacts.Count == 0)
+        {
+            Console.WriteLine("Arama sonucunda herhangi bir veri bulunamadı.");
+        }
+        else
+        {
+            Console.WriteLine("Arama Sonuçlarınız:");
+            Console.WriteLine("**********************************************");
+            foreach (var contact in foundContacts)
+            {
+                Console.WriteLine(contact);
+            }
+        }
+    }
+}
+
+public class Contact
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string PhoneNumber { get; set; }
+
+    public Contact(string firstName, string lastName, string phoneNumber)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        PhoneNumber = phoneNumber;
+    }
+
+    public override string ToString()
+    {
+        return $"İsim: {FirstName} Soyisim: {LastName} Telefon Numarası: {PhoneNumber}";
+    }
+}
