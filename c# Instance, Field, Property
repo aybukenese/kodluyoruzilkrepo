@@ -1,0 +1,48 @@
+using System;
+
+class Program
+{
+    public class Employee
+    {
+        // Properties of the Employee class
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int EmployeeNumber { get; set; }
+        public string Department { get; set; }
+
+        // Method to display employee information
+        public void DisplayEmployeeInfo()
+        {
+            Console.WriteLine("Employee Name: " + FirstName + " " + LastName);
+            Console.WriteLine("Employee Number: " + EmployeeNumber);
+            Console.WriteLine("Department: " + Department);
+        }
+    }
+
+    static void Main(string[] args)
+    {
+        // Creating first employee object
+        Employee employee1 = new Employee();
+        employee1.FirstName = "Ayşe";
+        employee1.LastName = "Kara";
+        employee1.EmployeeNumber = 23456789;
+        employee1.Department = "Human Resources";
+
+        // Display information of the first employee
+        Console.WriteLine("Employee 1 Information:");
+        employee1.DisplayEmployeeInfo();
+
+        Console.WriteLine("\n");
+
+        // Creating second employee object
+        Employee employee2 = new Employee();
+        employee2.FirstName = "Deniz";
+        employee2.LastName = "Ardahan";
+        employee2.EmployeeNumber = 25646789;
+        employee2.Department = "Purchasing";
+
+        // Display information of the second employee
+        Console.WriteLine("Employee 2 Information:");
+        employee2.DisplayEmployeeInfo();
+    }
+}
