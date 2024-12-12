@@ -1,0 +1,50 @@
+using System;
+
+public class Calisan
+{
+    public string Ad { get; set; }
+    public string Soyad { get; set; }
+    public int Numara { get; set; }
+    public string Departman { get; set; }
+
+    // Kurucu metot (constructor)
+    public Calisan(string ad, string soyad, string departman = "")
+    {
+        Ad = ad;
+        Soyad = soyad;
+        Departman = departman;
+        Numara = 0; // Varsayılan olarak 0
+    }
+
+    public void CalisanBilgileri()
+    {
+        Console.WriteLine($"Çalışan Adı: {Ad}, Soyadı: {Soyad}, Numara: {Numara}, Departman: {Departman}");
+    }
+
+    // Aşırı yüklenmiş kurucu metot
+    public Calisan(string ad, string soyad, int numara, string departman)
+    {
+        Ad = ad;
+        Soyad = soyad;
+        Numara = numara;
+        Departman = departman;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Kurucu metot ile nesne oluşturma
+        Calisan calisan1 = new Calisan("Ayşe", "Yılmaz", "İnsan Kaynakları");
+        calisan1.CalisanBilgileri();
+
+        // Parametreli kurucu metot kullanarak nesne oluşturma
+        Calisan calisan2 = new Calisan("Mehmet", "Öztürk", 101, "Muhasebe");
+        calisan2.CalisanBilgileri();
+
+        // Parametre almayarak varsayılan kurucu metot ile nesne oluşturma
+        Calisan calisan3 = new Calisan("Ali", "Kara");
+        calisan3.CalisanBilgileri();
+    }
+}
