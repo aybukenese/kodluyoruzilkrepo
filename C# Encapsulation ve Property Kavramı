@@ -1,0 +1,102 @@
+using System;
+
+class Ogrenci
+{
+    // Private Fields
+    private string isim;
+    private string soyisim;
+    private int ogrenciNo;
+    private int sinif;
+
+    // Constructor
+    public Ogrenci(string isim, string soyisim, int ogrenciNo, int sinif)
+    {
+        this.isim = isim;
+        this.soyisim = soyisim;
+        this.ogrenciNo = ogrenciNo;
+        this.sinif = sinif;
+    }
+
+    // Properties
+    public string Isim
+    {
+        get { return isim; }
+        set { isim = value; }
+    }
+
+    public string Soyisim
+    {
+        get { return soyisim; }
+        set { soyisim = value; }
+    }
+
+    public int OgrenciNo
+    {
+        get { return ogrenciNo; }
+        set { ogrenciNo = value; }
+    }
+
+    public int Sinif
+    {
+        get { return sinif; }
+        set
+        {
+            if (value >= 1)
+            {
+                sinif = value;
+            }
+            else
+            {
+                Console.WriteLine("Sınıf 1'den küçük olamaz.");
+            }
+        }
+    }
+
+    // Method to display student info
+    public void OgrenciBilgileri()
+    {
+        Console.WriteLine($"Öğrenci Adı: {isim} {soyisim}");
+        Console.WriteLine($"Öğrenci Numarası: {ogrenciNo}");
+        Console.WriteLine($"Öğrenci Sınıfı: {sinif}");
+    }
+
+    // Method to increase class level
+    public void SınıfArttir()
+    {
+        sinif++;
+        Console.WriteLine($"Yeni Sınıf: {sinif}");
+    }
+
+    // Method to decrease class level
+    public void SınıfDusur()
+    {
+        if (sinif > 1)
+        {
+            sinif--;
+            Console.WriteLine($"Yeni Sınıf: {sinif}");
+        }
+        else
+        {
+            Console.WriteLine("Sınıf 1'den küçük olamaz.");
+        }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Create a new student object
+        Ogrenci ogrenci1 = new Ogrenci("Ayşe", "Yılmaz", 293, 3);
+
+        // Display student info
+        ogrenci1.OgrenciBilgileri();
+
+        // Change class and display again
+        ogrenci1.SınıfArttir();  // Increase the class level
+        ogrenci1.SınıfDusur();   // Decrease the class level
+
+        // Show the updated student info
+        ogrenci1.OgrenciBilgileri();
+    }
+}
