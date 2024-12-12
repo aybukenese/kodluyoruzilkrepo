@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        // Sayı listesi oluşturma ve eleman ekleme
+        List<int> sayiListesi = new List<int>();
+        sayiListesi.Add(23);
+        sayiListesi.Add(4);
+        sayiListesi.Add(92);
+        sayiListesi.Add(36);
+
+        // Renk listesi oluşturma ve eleman ekleme
+        List<string> renkListesi = new List<string>();
+        renkListesi.Add("Kırmızı");
+        renkListesi.Add("Mavi");
+        renkListesi.Add("Turuncu");
+        renkListesi.Add("Yeşil");
+
+        // Listelerdeki eleman sayısını öğrenme
+        Console.WriteLine("Sayı listesi eleman sayısı: " + sayiListesi.Count);
+        Console.WriteLine("Renk listesi eleman sayısı: " + renkListesi.Count);
+
+        // Foreach ile elemanları yazdırma
+        Console.WriteLine("Sayı listesi elemanları:");
+        foreach (var sayi in sayiListesi)
+        {
+            Console.WriteLine(sayi);
+        }
+
+        Console.WriteLine("Renk listesi elemanları:");
+        foreach (var renk in renkListesi)
+        {
+            Console.WriteLine(renk);
+        }
+
+        // Listeden eleman çıkarma
+        sayiListesi.Remove(23);
+        renkListesi.Remove("Yeşil");
+        Console.WriteLine("23 ve Yeşil çıkarıldı.");
+
+        // Eleman kontrolü
+        Console.WriteLine("Sayı listesi 92 içeriyor mu? " + sayiListesi.Contains(92));
+        Console.WriteLine("Renk listesi Turuncu içeriyor mu? " + renkListesi.Contains("Turuncu"));
+
+        // Dizi -> Liste dönüşümü
+        string[] hayvanlar = { "Kedi", "Köpek", "Kuş" };
+        List<string> hayvanListesi = new List<string>(hayvanlar);
+        Console.WriteLine("Hayvan listesi elemanları:");
+        foreach (var hayvan in hayvanListesi)
+        {
+            Console.WriteLine(hayvan);
+        }
+
+        // Listeyi temizleme
+        hayvanListesi.Clear();
+        Console.WriteLine("Hayvan listesi temizlendi. Eleman sayısı: " + hayvanListesi.Count);
+
+        // Kullanıcı sınıfı ile liste işlemleri
+        List<Kullanici> kullanicilar = new List<Kullanici>
+        {
+            new Kullanici { Isim = "Ayse", Soyisim = "Yilmaz", Yas = 25 },
+            new Kullanici { Isim = "Ahmet", Soyisim = "Kaya", Yas = 30 }
+        };
+
+        Console.WriteLine("Kullanıcı listesi elemanları:");
+        foreach (var kullanici in kullanicilar)
+        {
+            Console.WriteLine($"Isim: {kullanici.Isim}, Soyisim: {kullanici.Soyisim}, Yas: {kullanici.Yas}");
+        }
+    }
+}
+
+class Kullanici
+{
+    public string Isim { get; set; }
+    public string Soyisim { get; set; }
+    public int Yas { get; set; }
+}
