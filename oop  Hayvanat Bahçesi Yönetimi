@@ -1,0 +1,22 @@
+             +--------------------+
+             |       Animal       |  
+             +--------------------+
+             | - speciesName: String|
+             | - weight: Double     |
+             | - age: Int           |
+             +--------------------+
+             | + getDosage() : String|
+             | + getFeedSchedule() : String|
+             | + makeSound() : String |
+             +--------------------+
+                      ^
+                      |
+          +-----------+------------+-----------+
+          |                       |           |
+    +------------+          +-----------+   +----------+
+    |    Horse   |          |  BigCat   |   |  Rodent  |
+    +------------+          +-----------+   +----------+
+    |              |          |             |            |
+    | + getFeedSchedule() : String | + getFeedSchedule() : String |
+    | + makeSound() : String      | + makeSound() : String      |
+    +---------------------------+ +---------------------------+ 
