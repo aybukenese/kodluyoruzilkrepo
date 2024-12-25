@@ -1,0 +1,40 @@
+                     +--------------------+
+                     |       Film         |
+                     +--------------------+
+                     | - id: String       |
+                     | - title: String    |
+                     | - genre: String    |
+                     | - price: Double    |
+                     | - availability: Boolean|
+                     +--------------------+
+                     | + getDetails() : String |
+                     | + requestFilm() : Boolean|
+                     +--------------------+
+                             ^
+                             |
+                     +-------+-------+
+                             |
+             +--------------------------+
+             |                          |
+      +------------------+        +-------------------+
+      |    User          |        |    FilmStore      |
+      +------------------+        +-------------------+
+      | - id: String     |        | - films: List<Film>|
+      | - name: String   |        +-------------------+
+      | - email: String  |        | + listFilms() : List<Film>|
+      | - isSubscribed: Boolean|  | + sortFilms() : List<Film>|
+      | - credits: Double|        | + requestFilm()     |
+      +------------------+        | + buyFilm()         |
+      | + purchaseCredits()|       | + rentFilm()        |
+      | + buyFilm()       |        +-------------------+
+      | + rentFilm()      |
+      | + subscribe()     |
+      +------------------+
+          ^        ^        
+          |        |         
++-------------------+    +----------------------+
+|   NormalUser      |    |    Subscriber        |
++-------------------+    +----------------------+
+|                   |    |                      |
+| + buyFilm()       |    | + rentFilm()          |
++-------------------+    +----------------------+
