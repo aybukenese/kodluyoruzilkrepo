@@ -1,0 +1,47 @@
+                           +-------------------+
+                           |    Airline        |
+                           +-------------------+
+                           | - id: String      |
+                           | - name: String    |
+                           +-------------------+
+                           | + addFlight()     |
+                           | + addPilot()      |
+                           +-------------------+
+                                 |
+                                 |
+                        +--------+--------+
+                        |                 |
+                 +-------------+      +-------------+
+                 |   Airplane  |      |   Pilot     |
+                 +-------------+      +-------------+
+                 | - id: String|      | - id: String|
+                 | - type: String |   | - name: String|
+                 | - status: String|  | - experienceLevel: String|
+                 | - requiredPilots: int| + getExperienceLevel() : String|
+                 +-------------+      +-------------+
+                        |                     |
+                        +-----------+---------+
+                                    |
+                              +------------+
+                              |   Flight   |
+                              +------------+
+                              | - id: String|
+                              | - departureTime: DateTime|
+                              | - arrivalTime: DateTime |
+                              | - departureAirport: Airport|
+                              | - arrivalAirport: Airport |
+                              | - pilot: Pilot         |
+                              | - copilot: Pilot       |
+                              +------------+
+                              | + scheduleFlight()     |
+                              +------------+
+                                    |
+                                    |
+                              +-------------+
+                              |   Airport   |
+                              +-------------+
+                              | - id: String|
+                              | - name: String|
+                              +-------------+
+                              | + getAirportInfo() : String|
+                              +-------------+
