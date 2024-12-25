@@ -1,0 +1,117 @@
+using System;
+using System.Collections.Generic;
+
+namespace UniversitySystem
+{
+    // Base Class for Employee
+    class Employee
+    {
+        public string Name { get; set; }
+        public Office Office { get; set; }
+
+        public Employee(string name, Office office)
+        {
+            Name = name;
+            Office = office;
+        }
+    }
+
+    // Subclass for Professor
+    class Professor : Employee
+    {
+        public Professor(string name, Office office) : base(name, office) { }
+    }
+
+    // Subclass for Staff
+    class Staff : Employee
+    {
+        public Staff(string name, Office office) : base(name, office) { }
+    }
+
+    // Class for Office
+    class Office
+    {
+        public string OfficeName { get; set; }
+
+        public Office(string officeName)
+        {
+            OfficeName = officeName;
+        }
+    }
+
+    // Class for Department
+    class Department
+    {
+        public string DepartmentName { get; set; }
+        public List<Office> Offices { get; set; } = new List<Office>();
+
+        public Department(string departmentName)
+        {
+            DepartmentName = departmentName;
+        }
+    }
+
+    // Class for University
+    class University
+    {
+        public string UniversityName { get; set; }
+        public List<Classroom> Classrooms { get; set; } = new List<Classroom>();
+        public List<Department> Departments { get; set; } = new List<Department>();
+        public List<Office> Offices { get; set; } = new List<Office>();
+
+        public University(string universityName)
+        {
+            UniversityName = universityName;
+        }
+    }
+
+    // Class for Classroom
+    class Classroom
+    {
+        public string ClassroomName { get; set; }
+
+        public Classroom(string classroomName)
+        {
+            ClassroomName = classroomName;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Create Offices
+            Office office1 = new Office("Office 101");
+            Office office2 = new Office("Office 102");
+
+            // Create Employees
+            Professor prof1 = new Professor("Dr. Smith", office1);
+            Staff staff1 = new Staff("John Doe", office2);
+
+            // Create Department
+            Department csDepartment = new Department("Computer Science");
+            csDepartment.Offices.Add(office1);
+            csDepartment.Offices.Add(office2);
+
+            // Create University
+            University university = new University("Tech University");
+            university.Departments.Add(csDepartment);
+            university.Classrooms.Add(new Classroom("Classroom A"));
+            university.Classrooms.Add(new Classroom("Classroom B"));
+
+            // Display Information
+            Console.WriteLine($"University: {university.UniversityName}");
+            foreach (var dept in university.Departments)
+            {
+                Console.WriteLine($"Department: {dept.DepartmentName}");
+                foreach (var office in dept.Offices)
+                {
+                    Console.WriteLine($"  Office: {office.OfficeName}");
+                }
+            }
+
+            Console.WriteLine($"Employee: {prof1.Name}, Office: {prof1.Office.OfficeName}");
+            Console.WriteLine($"Employee: {staff1.Name}, Office: {staff1.Office.OfficeName}");
+        }
+    }
+}
