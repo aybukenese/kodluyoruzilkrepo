@@ -1,0 +1,59 @@
+using System;
+
+namespace StringManipulationApp
+{
+    // String üzerinde karakter çıkarma işlemleri
+    public class StringManipulator
+    {
+        public string RemoveCharacterAtIndex(string input, int index)
+        {
+            if (index < 0 || index >= input.Length)
+            {
+                Console.WriteLine("Index is out of bounds for the given string.");
+                return input;
+            }
+
+            return input.Remove(index, 1);
+        }
+    }
+
+    // Kullanıcıdan girdi alma ve uygulama akışı
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                Console.WriteLine("Enter string and index separated by a comma (e.g., Algoritma,3):");
+                string input = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(input) || !input.Contains(","))
+                {
+                    Console.WriteLine("Invalid input format. Please provide a string and index separated by a comma.");
+                    return;
+                }
+
+                var parts = input.Split(',');
+
+                if (parts.Length != 2 || !int.TryParse(parts[1], out int index))
+                {
+                    Console.WriteLine("Invalid input format. Ensure the index is a number.");
+                    return;
+                }
+
+                string text = parts[0];
+
+                var manipulator = new StringManipulator();
+
+                // Karakter çıkarma işlemi
+                string result = manipulator.RemoveCharacterAtIndex(text, index);
+
+                Console.WriteLine($"Result: {result}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+    }
+}
