@@ -1,0 +1,64 @@
+using System;
+
+namespace CircleDrawerApp
+{
+    // Daire çizim işlemleri
+    public class CircleDrawer
+    {
+        public void DrawCircle(int radius)
+        {
+            for (int y = -radius; y <= radius; y++)
+            {
+                for (int x = -radius; x <= radius; x++)
+                {
+                    if (IsPointInCircle(x, y, radius))
+                    {
+                        Console.Write("*");
+                    }
+                    else
+                    {
+                        Console.Write(" ");
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+
+        private bool IsPointInCircle(int x, int y, int radius)
+        {
+            return x * x + y * y <= radius * radius;
+        }
+    }
+
+    // Kullanıcıdan girdi alma ve uygulama akışı
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                Console.Write("Enter the radius of the circle: ");
+                int radius = int.Parse(Console.ReadLine());
+
+                if (radius <= 0)
+                {
+                    Console.WriteLine("Radius must be a positive integer.");
+                    return;
+                }
+
+                var circleDrawer = new CircleDrawer();
+
+                // Daire çizimi
+                circleDrawer.DrawCircle(radius);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid integer.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+    }
+}
