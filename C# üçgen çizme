@@ -1,0 +1,49 @@
+using System;
+
+namespace TriangleDrawerApp
+{
+    // Üçgen çizim işlemleri
+    public class TriangleDrawer
+    {
+        public void DrawTriangle(int size)
+        {
+            for (int i = 1; i <= size; i++)
+            {
+                string line = new string('*', i);
+                Console.WriteLine(line);
+            }
+        }
+    }
+
+    // Kullanıcıdan girdi alma ve uygulama akışı
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                Console.Write("Enter the size of the triangle: ");
+                int size = int.Parse(Console.ReadLine());
+
+                if (size <= 0)
+                {
+                    Console.WriteLine("Size must be a positive integer.");
+                    return;
+                }
+
+                var triangleDrawer = new TriangleDrawer();
+
+                // Üçgen çizimi
+                triangleDrawer.DrawTriangle(size);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid integer.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+    }
+}
