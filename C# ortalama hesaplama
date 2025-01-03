@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace FibonacciAverageApp
+{
+    // Fibonacci hesaplama işlemleri
+    public class FibonacciCalculator
+    {
+        public List<int> GenerateFibonacciSeries(int depth)
+        {
+            var series = new List<int> { 0, 1 };
+
+            for (int i = 2; i < depth; i++)
+            {
+                series.Add(series[i - 1] + series[i - 2]);
+            }
+
+            return series.Take(depth).ToList();
+        }
+    }
+
+    // Ortalama hesaplama işlemleri
+    public class AverageCalculator
+    {
+        public double CalculateAverage(List<int> numbers)
+        {
+            if (numbers == null || !numbers.Any())
+                throw new ArgumentException("The list of numbers cannot be null or empty.");
+
+            return numbers.Average();
+        }
+    }
+
+    // Kullanıcıdan girdi alma ve uygulama akışı
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                Console.Write("Enter the depth of Fibonacci series: ");
+                int depth = int.Parse(Console.ReadLine());
+
+                if (depth <= 0)
+                {
+                    Console.WriteLine("Depth must be a positive integer.");
+                    return;
+                }
+
+                var fibonacciCalculator = new FibonacciCalculator();
+                var averageCalculator = new AverageCalculator();
+
+                // Fibonacci serisi oluşturma
+                var series = fibonacciCalculator.GenerateFibonacciSeries(depth);
+
+                // Ortalama hesaplama
+                double average = averageCalculator.CalculateAverage(series);
+
+                Console.WriteLine($"Fibonacci Series: {string.Join(", ", series)}");
+                Console.WriteLine($"Average of Fibonacci Series: {average:F2}");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid integer.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+    }
+}
