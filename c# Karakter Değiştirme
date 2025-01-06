@@ -1,0 +1,36 @@
+using System;
+
+namespace StringCharacterSwap
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Lütfen bir metin giriniz (kelimeler aralarında boşluk olacak şekilde):");
+            string input = Console.ReadLine();
+
+            string output = SwapFirstAndLastCharacters(input);
+            Console.WriteLine("Sonuç: " + output);
+        }
+
+        static string SwapFirstAndLastCharacters(string input)
+        {
+            string[] words = input.Split(' ');
+            
+            for (int i = 0; i < words.Length; i++)
+            {
+                string word = words[i];
+
+                if (word.Length > 1)
+                {
+                    char firstChar = word[0];
+                    char lastChar = word[^1];
+                    string middle = word.Substring(1, word.Length - 2);
+                    words[i] = lastChar + middle + firstChar;
+                }
+            }
+
+            return string.Join(" ", words);
+        }
+    }
+}
