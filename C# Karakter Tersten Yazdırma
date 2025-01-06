@@ -1,0 +1,38 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Input string
+        Console.WriteLine("Lütfen bir metin giriniz:");
+        string input = Console.ReadLine();
+
+        // Process and output the result
+        string output = SwapLastCharacter(input);
+        Console.WriteLine("Sonuç: " + output);
+    }
+
+    static string SwapLastCharacter(string input)
+    {
+        // Split the input string into words
+        string[] words = input.Split(' ');
+        
+        for (int i = 0; i < words.Length; i++)
+        {
+            string word = words[i];
+
+            if (word.Length > 1) // Only process words longer than 1 character
+            {
+                // Swap first and last characters
+                char firstChar = word[0];
+                char lastChar = word[^1];
+                string middle = word.Substring(1, word.Length - 2);
+                words[i] = lastChar + middle + firstChar;
+            }
+        }
+
+        // Join the words back into a single string
+        return string.Join(" ", words);
+    }
+}
