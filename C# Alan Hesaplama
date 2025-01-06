@@ -1,0 +1,114 @@
+using System;
+
+namespace GeometryCalculator
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Geometrik Şekil Alan ve Çevre Hesaplama");
+
+            // Kullanıcıdan şekil seçimi al
+            Console.WriteLine("Lütfen bir şekil seçin (Daire, Üçgen, Kare, Dikdörtgen):");
+            string shape = Console.ReadLine()?.ToLower();
+
+            // Kullanıcıdan hesaplama tipi al
+            Console.WriteLine("Hesaplanacak boyutu seçin (Alan, Çevre):");
+            string calculationType = Console.ReadLine()?.ToLower();
+
+            double result = 0;
+
+            switch (shape)
+            {
+                case "daire":
+                    result = CalculateCircle(calculationType);
+                    break;
+                case "üçgen":
+                    result = CalculateTriangle(calculationType);
+                    break;
+                case "kare":
+                    result = CalculateSquare(calculationType);
+                    break;
+                case "dikdörtgen":
+                    result = CalculateRectangle(calculationType);
+                    break;
+                default:
+                    Console.WriteLine("Geçersiz şekil seçimi.");
+                    return;
+            }
+
+            Console.WriteLine($"Sonuç: {result}");
+        }
+
+        static double CalculateCircle(string calculationType)
+        {
+            Console.WriteLine("Dairenin yarıçapını girin:");
+            double radius = Convert.ToDouble(Console.ReadLine());
+
+            if (calculationType == "alan")
+                return Math.PI * Math.Pow(radius, 2);
+            else if (calculationType == "çevre")
+                return 2 * Math.PI * radius;
+
+            Console.WriteLine("Geçersiz hesaplama tipi.");
+            return 0;
+        }
+
+        static double CalculateTriangle(string calculationType)
+        {
+            if (calculationType == "alan")
+            {
+                Console.WriteLine("Üçgenin taban uzunluğunu girin:");
+                double baseLength = Convert.ToDouble(Console.ReadLine());
+
+                Console.WriteLine("Üçgenin yüksekliğini girin:");
+                double height = Convert.ToDouble(Console.ReadLine());
+
+                return 0.5 * baseLength * height;
+            }
+            else if (calculationType == "çevre")
+            {
+                Console.WriteLine("Üç kenar uzunluğunu sırasıyla girin:");
+                double a = Convert.ToDouble(Console.ReadLine());
+                double b = Convert.ToDouble(Console.ReadLine());
+                double c = Convert.ToDouble(Console.ReadLine());
+
+                return a + b + c;
+            }
+
+            Console.WriteLine("Geçersiz hesaplama tipi.");
+            return 0;
+        }
+
+        static double CalculateSquare(string calculationType)
+        {
+            Console.WriteLine("Karenin bir kenar uzunluğunu girin:");
+            double side = Convert.ToDouble(Console.ReadLine());
+
+            if (calculationType == "alan")
+                return Math.Pow(side, 2);
+            else if (calculationType == "çevre")
+                return 4 * side;
+
+            Console.WriteLine("Geçersiz hesaplama tipi.");
+            return 0;
+        }
+
+        static double CalculateRectangle(string calculationType)
+        {
+            Console.WriteLine("Dikdörtgenin kısa kenarını girin:");
+            double shortSide = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine("Dikdörtgenin uzun kenarını girin:");
+            double longSide = Convert.ToDouble(Console.ReadLine());
+
+            if (calculationType == "alan")
+                return shortSide * longSide;
+            else if (calculationType == "çevre")
+                return 2 * (shortSide + longSide);
+
+            Console.WriteLine("Geçersiz hesaplama tipi.");
+            return 0;
+        }
+    }
+}
