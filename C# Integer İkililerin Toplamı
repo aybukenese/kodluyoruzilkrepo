@@ -1,0 +1,41 @@
+using System;
+
+namespace PairSumAlgorithm
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Lütfen ikilileri aralarına boşluk koyarak giriniz (örn: 2 3 1 5 2 5 3 3):");
+            string input = Console.ReadLine();
+
+            // Stringi sayılara dönüştür ve işlem yap
+            string[] numbers = input.Split(' ');
+
+            if (numbers.Length % 2 != 0)
+            {
+                Console.WriteLine("Geçersiz giriş. Lütfen çift sayıda tam sayı giriniz.");
+                return;
+            }
+
+            for (int i = 0; i < numbers.Length; i += 2)
+            {
+                // Çiftleri al
+                int num1 = int.Parse(numbers[i]);
+                int num2 = int.Parse(numbers[i + 1]);
+
+                // İşlemi gerçekleştir
+                int sum = num1 + num2;
+
+                if (num1 == num2)
+                {
+                    Console.WriteLine(Math.Pow(sum, 2)); // Aynıysa karesini yazdır
+                }
+                else
+                {
+                    Console.WriteLine(sum); // Farklıysa toplamını yazdır
+                }
+            }
+        }
+    }
+}
