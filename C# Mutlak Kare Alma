@@ -1,0 +1,38 @@
+using System;
+
+namespace NumberDifferenceCalculator
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Lütfen sayıları aralarına boşluk koyarak giriniz (örn: 56 45 68 77):");
+            string input = Console.ReadLine();
+
+            // Stringi sayılara dönüştür ve işlem yap
+            string[] numbers = input.Split(' ');
+            
+            int sumBelow67 = 0;
+            int sumAbove67 = 0;
+            int threshold = 67;
+
+            foreach (string number in numbers)
+            {
+                int value = int.Parse(number);
+                int difference = value - threshold;
+
+                if (value < threshold)
+                {
+                    sumBelow67 += Math.Abs(difference); // 67'den küçükse farkı topla
+                }
+                else if (value > threshold)
+                {
+                    sumAbove67 += (int)Math.Pow(difference, 2); // 67'den büyükse farkın karesini topla
+                }
+            }
+
+            Console.WriteLine($"Küçüklerin farklarının toplamı: {sumBelow67}");
+            Console.WriteLine($"Büyüklerin farklarının mutlak karelerinin toplamı: {sumAbove67}");
+        }
+    }
+}
