@@ -1,0 +1,168 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+class Program
+{
+    static Dictionary<string, int> accounts = new Dictionary<string, int>
+    {
+        {"user1", 1000},
+        {"user2", 2000},
+        {"user3", 3000}
+    };
+
+    static List<string> transactionLogs = new List<string>();
+    static List<string> fraudLogs = new List<string>();
+
+    static void Main()
+    {
+        Console.WriteLine("*** ATM Uygulamasına Hoş Geldiniz ***\n");
+
+        while (true)
+        {
+            Console.Write("Lütfen kullanıcı adınızı giriniz: ");
+            string username = Console.ReadLine();
+
+            if (!accounts.ContainsKey(username))
+            {
+                Console.WriteLine("Bu kullanıcı sistemde kayıtlı değil! Hatalı giriş denemesi.");
+                fraudLogs.Add($"{DateTime.Now}: Hatalı giriş denemesi - Kullanıcı: {username}");
+                continue;
+            }
+
+            Console.WriteLine("Hoş geldiniz, " + username + "!\n");
+            while (true)
+            {
+                Console.WriteLine("Lütfen yapmak istediğiniz işlemi seçin:");
+                Console.WriteLine("1. Para Çekme");
+                Console.WriteLine("2. Para Yatırma");
+                Console.WriteLine("3. Ödeme Yapma");
+                Console.WriteLine("4. Gün Sonu Al");
+                Console.WriteLine("5. Çıkış\n");
+
+                Console.Write("Seçiminiz: ");
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        Withdraw(username);
+                        break;
+                    case "2":
+                        Deposit(username);
+                        break;
+                    case "3":
+                        MakePayment(username);
+                        break;
+                    case "4":
+                        EndOfDay();
+                        return;
+                    case "5":
+                        Console.WriteLine("ATM'den çıkış yapılıyor. İyi günler!\n");
+                        return;
+                    default:
+                        Console.WriteLine("Geçersiz seçim. Lütfen tekrar deneyin.\n");
+                        break;
+                }
+            }
+        }
+    }
+
+    static void Withdraw(string username)
+    {
+        Console.Write("Çekmek istediğiniz miktarı giriniz: ");
+        if (int.TryParse(Console.ReadLine(), out int amount) && amount > 0)
+        {
+            if (accounts[username] >= amount)
+            {
+                accounts[username] -= amount;
+                Console.WriteLine($"Başarıyla {amount} TL çektiniz. Güncel bakiyeniz: {accounts[username]} TL\n");
+                transactionLogs.Add($"{DateTime.Now}: {username} {amount} TL çekti.");
+            }
+            else
+            {
+                Console.WriteLine("Yetersiz bakiye. İşlem gerçekleştirilemedi.\n");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Geçersiz miktar. Lütfen tekrar deneyin.\n");
+        }
+    }
+
+    static void Deposit(string username)
+    {
+        Console.Write("Yatırmak istediğiniz miktarı giriniz: ");
+        if (int.TryParse(Console.ReadLine(), out int amount) && amount > 0)
+        {
+            accounts[username] += amount;
+            Console.WriteLine($"Başarıyla {amount} TL yatırdınız. Güncel bakiyeniz: {accounts[username]} TL\n");
+            transactionLogs.Add($"{DateTime.Now}: {username} {amount} TL yatırdı.");
+        }
+        else
+        {
+            Console.WriteLine("Geçersiz miktar. Lütfen tekrar deneyin.\n");
+        }
+    }
+
+    static void MakePayment(string username)
+    {
+        Console.Write("Ödemek istediğiniz miktarı giriniz: ");
+        if (int.TryParse(Console.ReadLine(), out int amount) && amount > 0)
+        {
+            if (accounts[username] >= amount)
+            {
+                accounts[username] -= amount;
+                Console.WriteLine($"Başarıyla {amount} TL ödeme yaptınız. Güncel bakiyeniz: {accounts[username]} TL\n");
+                transactionLogs.Add($"{DateTime.Now}: {username} {amount} TL ödeme yaptı.");
+            }
+            else
+            {
+                Console.WriteLine("Yetersiz bakiye. İşlem gerçekleştirilemedi.\n");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Geçersiz miktar. Lütfen tekrar deneyin.\n");
+        }
+    }
+
+    static void EndOfDay()
+    {
+        Console.WriteLine("\n*** Gün Sonu Raporu ***\n");
+
+        Console.WriteLine("İşlem Logları:");
+        foreach (var log in transactionLogs)
+        {
+            Console.WriteLine(log);
+        }
+
+        Console.WriteLine("\nFraud Logları:");
+        foreach (var log in fraudLogs)
+        {
+            Console.WriteLine(log);
+        }
+
+        string fileName = $"EOD_{DateTime.Now:ddMMyyyy}.txt";
+        string filePath = Path.Combine(Environment.CurrentDirectory, fileName);
+
+        using (StreamWriter writer = new StreamWriter(filePath))
+        {
+            writer.WriteLine("*** Gün Sonu Raporu ***\n");
+            writer.WriteLine("İşlem Logları:");
+            foreach (var log in transactionLogs)
+            {
+                writer.WriteLine(log);
+            }
+
+            writer.WriteLine("\nFraud Logları:");
+            foreach (var log in fraudLogs)
+            {
+                writer.WriteLine(log);
+            }
+        }
+
+        Console.WriteLine($"\nGün sonu raporu {filePath} konumuna kaydedildi.\n");
+    }
+}
