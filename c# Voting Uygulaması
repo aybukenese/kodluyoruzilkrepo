@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Program
+{
+    static Dictionary<string, int> categories = new Dictionary<string, int>
+    {
+        {"Film Kategorileri", 0},
+        {"Tech Stack Kategorileri", 0},
+        {"Spor Kategorileri", 0}
+    };
+
+    static HashSet<string> registeredUsers = new HashSet<string>();
+
+    static void Main()
+    {
+        Console.WriteLine("*** Voting Uygulamasına Hoş Geldiniz ***\n");
+
+        while (true)
+        {
+            Console.Write("Lütfen kullanıcı adınızı giriniz: ");
+            string username = Console.ReadLine();
+
+            if (!registeredUsers.Contains(username))
+            {
+                Console.WriteLine("Bu kullanıcı sistemde kayıtlı değil. Kayıt oluşturuluyor...");
+                registeredUsers.Add(username);
+                Console.WriteLine("Kayıt başarılı!\n");
+            }
+            else
+            {
+                Console.WriteLine("Hoş geldiniz, " + username + "!\n");
+            }
+
+            Console.WriteLine("Oylamaya sunulan kategoriler:");
+            int index = 1;
+            foreach (var category in categories.Keys)
+            {
+                Console.WriteLine($"{index}. {category}");
+                index++;
+            }
+
+            Console.Write("Lütfen oy vermek istediğiniz kategorinin numarasını seçiniz: ");
+            if (int.TryParse(Console.ReadLine(), out int choice) && choice > 0 && choice <= categories.Count)
+            {
+                string selectedCategory = categories.Keys.ElementAt(choice - 1);
+                categories[selectedCategory]++;
+                Console.WriteLine($"{selectedCategory} kategorisine oy verdiniz!\n");
+            }
+            else
+            {
+                Console.WriteLine("Geçersiz seçim. Lütfen tekrar deneyin.\n");
+                continue;
+            }
+
+            Console.Write("Başka bir kullanıcı oy vermek istiyor mu? (E/H): ");
+            string continueVoting = Console.ReadLine()?.ToUpper();
+            if (continueVoting != "E")
+            {
+                ShowResults();
+                break;
+            }
+        }
+    }
+
+    static void ShowResults()
+    {
+        Console.WriteLine("\n*** Oylama Sonuçları ***\n");
+        int totalVotes = categories.Values.Sum();
+
+        foreach (var category in categories)
+        {
+            string categoryName = category.Key;
+            int votes = category.Value;
+            double percentage = totalVotes > 0 ? (votes / (double)totalVotes) * 100 : 0;
+
+            Console.WriteLine($"{categoryName}: {votes} oy (%{percentage:F2})");
+        }
+
+        Console.WriteLine("\nTeşekkür ederiz, iyi günler!\n");
+    }
+}
