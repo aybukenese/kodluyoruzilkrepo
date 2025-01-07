@@ -1,0 +1,106 @@
+using System;
+using System.Drawing;
+using System.IO;
+using ZXing;
+using ZXing.Common;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("*** Barcode Generator/Reader ***\n");
+
+        while (true)
+        {
+            Console.WriteLine("Lütfen yapmak istediğiniz işlemi seçin:");
+            Console.WriteLine("1. Barkod Oluşturma");
+            Console.WriteLine("2. Barkod Okuma");
+            Console.WriteLine("3. Çıkış\n");
+
+            Console.Write("Seçiminiz: ");
+            string choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    GenerateBarcode();
+                    break;
+                case "2":
+                    ReadBarcode();
+                    break;
+                case "3":
+                    Console.WriteLine("Uygulama kapatılıyor. İyi günler!\n");
+                    return;
+                default:
+                    Console.WriteLine("Geçersiz seçim. Lütfen tekrar deneyin.\n");
+                    break;
+            }
+        }
+    }
+
+    static void GenerateBarcode()
+    {
+        Console.Write("Oluşturmak istediğiniz barkod verisini giriniz: ");
+        string data = Console.ReadLine();
+
+        Console.Write("Dosyayı kaydetmek istediğiniz yolu giriniz (örneğin: C:\\temp\\barcode.png): ");
+        string filePath = Console.ReadLine();
+
+        try
+        {
+            var writer = new BarcodeWriter
+            {
+                Format = BarcodeFormat.CODE_128,
+                Options = new EncodingOptions
+                {
+                    Height = 100,
+                    Width = 300,
+                    Margin = 10
+                }
+            };
+
+            using (var bitmap = writer.Write(data))
+            {
+                bitmap.Save(filePath);
+                Console.WriteLine($"Barkod başarıyla oluşturuldu ve {filePath} konumuna kaydedildi.\n");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Hata: {ex.Message}\n");
+        }
+    }
+
+    static void ReadBarcode()
+    {
+        Console.Write("Okumak istediğiniz barkodun dosya yolunu giriniz (örneğin: C:\\temp\\barcode.png): ");
+        string filePath = Console.ReadLine();
+
+        try
+        {
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine("Belirtilen dosya bulunamadı. Lütfen doğru yolu kontrol edin.\n");
+                return;
+            }
+
+            var reader = new BarcodeReader();
+            using (var bitmap = (Bitmap)Image.FromFile(filePath))
+            {
+                var result = reader.Decode(bitmap);
+                if (result != null)
+                {
+                    Console.WriteLine($"Barkod Verisi: {result.Text}\n");
+                }
+                else
+                {
+                    Console.WriteLine("Barkod okunamadı. Lütfen dosyanın geçerli bir barkod içerdiğinden emin olun.\n");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Hata: {ex.Message}\n");
+        }
+    }
+}
