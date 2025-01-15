@@ -1,0 +1,20 @@
+-- 1. Film ismi 'n' harfi ile biten en uzun 5 filmi sıralama
+SELECT title, length
+FROM film
+WHERE title LIKE '%n'
+ORDER BY length DESC
+LIMIT 5;
+
+-- 2. Film ismi 'n' harfi ile biten, uzunluğu 6, 7, 8, 9, 10 olan en kısa 5 filmi sıralama
+SELECT title, length
+FROM film
+WHERE title LIKE '%n' AND length IN (6, 7, 8, 9, 10)
+ORDER BY length ASC
+LIMIT 5;
+
+-- 3. Store_id 1 olan müşteri verilerini last_name'e göre azalan sırayla sıralama ve ilk 4 veriyi getirme
+SELECT last_name
+FROM customer
+WHERE store_id = 1
+ORDER BY last_name DESC
+LIMIT 4;
